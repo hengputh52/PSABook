@@ -144,7 +144,7 @@ sequelize.sync({ alter: false }).then(async () => {
   console.log('='.repeat(60));
   console.log(`📅 Server started at: ${new Date().toISOString()}`);
   console.log(`🌐 Server running on: http://localhost:3000`);
-  console.log(`🔗 Database: Connected and synced`);
+  //console.log(`🔗 Database: Connected and synced`);
   console.log(`📊 Monitoring: All activities logged`);
   
   // Seed test books if database is empty
