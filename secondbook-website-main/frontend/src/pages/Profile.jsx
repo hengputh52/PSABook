@@ -8,6 +8,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("userProfile")) || {};
@@ -33,19 +35,28 @@ const Profile = () => {
     }
   }, [isEditing, userInfo]);
 
-  // Helper to compute avatar URL consistently
+  // Enhanced helper to fetch photo from Cloudinary with error handling
   const buildAvatar = () => {
     if (userInfo && userInfo.profile_photo) {
       let path = userInfo.profile_photo.replace(/\\/g, "/");
-      // If it's a full URL (Cloudinary or remote), use as-is
-      if (path.startsWith("http")) return path;
-      // If it's a local upload, ensure correct path
+      
+      // If it's a Cloudinary URL, return as-is
+      if (path.includes("cloudinary.com") || path.startsWith("https://res.cloudinary.com")) {
+        return path;
+      }
+      
+      // If it's any other HTTP URL, use as-is
+      if (path.startsWith("http")) {
+        return path;
+      }
+      
+      // If it's a local upload path
       if (!path.startsWith("uploads/")) {
         path = `uploads/${path}`;
       }
-      return `http://localhost:3000/${path}`;
+      return `${getApiUrl()}/${path}`;
     }
-    return "https://via.placeholder.com/150";
+    return "https://via.placeholder.com/150?text=No+Image";
   };
 
   const getApiUrl = () => {
@@ -179,6 +190,17 @@ const Profile = () => {
     }
   };
 
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+  };
+
+  const handleImageError = (e) => {
+    setImageLoading(false);
+    setImageError(true);
+    e.target.src = "https://via.placeholder.com/150?text=Error+Loading";
+  };
+
   return (
     <div className="profile-container">
       <h2 className="section-title">Profile</h2>
@@ -192,18 +214,16 @@ const Profile = () => {
           </button>
         </div>
         <div className="profile-image">
+          {imageLoading && <div className="loading-spinner">Loading...</div>}
           <img
-            src={(() => {
-              if (userInfo && userInfo.profile_photo) {
-                let path = userInfo.profile_photo.replace(/\\/g, "/");
-                if (!path.startsWith("http") && !path.startsWith("uploads/")) {
-                  path = `uploads/${path}`;
-                }
-                return path.startsWith("http") ? path : `${getApiUrl()}/${path}`;
-              }
-              return "https://via.placeholder.com/150";
-            })()}
+            src={buildAvatar()}
             alt="Profile"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            style={{
+              display: imageLoading ? 'none' : 'block',
+              opacity: imageError ? 0.5 : 1
+            }}
           />
         </div>
         <div className="profile-details">
