@@ -1,0 +1,289 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+  text-align: center;
+}
+
+.signup-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.signup-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 250px;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn img.logo-icon {
+  width: 20px;
+  height: 20px;
+  
+}
+.logo-icon-facebook{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.logo-icon-apple{
+  width: 20px;
+
+
+}
+
+.signup-btn.google {
+  background-color: white;
+  color: black;
+  border: 1px solid;
+  box-shadow: 5px 5px ;
+}
+
+.signup-btn.google:hover {
+  background-color: #357ae8;
+}
+
+.signup-btn.facebook {
+  background-color: #1877f2;
+  color: white;
+  box-shadow: 5px 5px #1877f2;
+}
+
+.signup-btn.facebook:hover {
+  background-color: #155dbb;
+}
+
+.signup-btn.apple {
+  background-color: black;
+  color: white;
+  border: solid 1px black;
+  box-shadow: 5px 5px #333;
+
+}
+
+.signup-btn.apple:hover {
+  background-color: #333;
+}
+
+.login-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.login-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.login-link:hover {
+  color: #0056b3;
+}
+
+.signup-form-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.signup-input {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background: #fafafa;
+  outline: none;
+  transition: border 0.2s;
+  color: #222;
+}
+
+.signup-input:not(:last-child) {
+  border-bottom: none;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+/* Container for split auth page */
+.auth-split-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+    background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+  position: relative;
+  overflow: hidden;
+  perspective: 1200px;
+  transition: flex-direction 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Swap sides visually */
+.auth-split-container.swapped {
+  flex-direction: row-reverse;
+}
+
+/* Each side of the split */
+.auth-side {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  padding: 40px 0;
+  
+    background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+  transition: box-shadow 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+  z-index: 1;
+}
+
+
+
+/* Animation for form pop-in */
+.auth-split-container.swapped .right-side .auth-form,
+.auth-split-container:not(.swapped) .left-side .auth-form {
+  animation: popIn 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.95);}
+  100% { opacity: 1; transform: scale(1);}
+}
+
+/* Responsive: stack vertically, no transform */
+@media (max-width: 900px) {
+  .auth-split-container {
+    flex-direction: column !important;
+  }
+  .left-side, .right-side {
+    border: none;
+    min-width: 0;
+    padding: 20px 0;
+    box-shadow: none !important;
+  }
+}
+
+/* Auth form styling */
+.auth-form {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px #0001;
+}
+
+/* Image side styling */
+.auth-image-side {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 60%;
+  
+}
+
+/* Image fills its side */
+.auth-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+}
+
+/* Swap text and link */
+.swap-text {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.swap-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Error message */
+.error-message {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+/* Input styling */
+.signup-input {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  background: #fafafa;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.signup-input:focus {
+  border: 1.5px solid #888;
+}
+
+/* Button styling */
+.submit-btn {
+  padding: 10px 0;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-btn:hover {
+  background: #444;
+}

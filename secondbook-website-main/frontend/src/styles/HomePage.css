@@ -1,0 +1,358 @@
+* {
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.homepage {
+  min-height: 100vh;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+}
+
+.animated-header {
+  background: transparent;
+  padding: 60px 0 24px 0;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+  
+}
+
+.animated-header h1 {
+  font-size: 1.7rem;
+  color: #171a20;
+  margin: 0;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.highlight {
+  color: #171a20;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #393c41;
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.highlight2 {
+  color: #171a20;
+  font-weight: 600;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 36px 0 24px 0;
+  gap: 0;
+}
+
+.search-bar {
+  width: 200px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #dadada;
+  border-radius: 0;
+  outline: none;
+  background: #f7f7f7;
+  color: #171a20;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: none;
+  border-right: none;
+  border-radius: 24px 0 0 24px;
+}
+
+.search-bar:focus {
+  border-color: #171a20;
+  background: #fff;
+}
+
+.search-btn {
+  background: #171a20;
+  color: #fff;
+  border: 1px solid #171a20;
+  border-radius: 0 24px 24px 0;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.search-btn:hover {
+  background: #171a20;
+  border-color: #171a20;
+}
+
+.banner {
+  margin: 36px auto 24px auto;
+  max-width: 700px;
+  background: #fafbfc;
+  color: #171a20;
+  border-radius: 12px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 16px #00000008;
+  border: 1px solid #ededed;
+}
+
+.banner h2 {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.highlight3 {
+  color: #171a20;
+  font-weight: 600;
+  background: #eaeaea;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.book-section {
+  margin: 48px auto 0 auto;
+  max-width: 1100px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 36px 24px 24px 24px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  color: #171a20;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: none;
+  border: none;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.see-more {
+  text-align: center;
+  color: #171a20;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 18px;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+
+.see-more:hover {
+  color: #171a20;
+  text-decoration: none;
+}
+
+.header-bg {
+  background-image:url("");
+  background-size: cover;
+  background-position: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.header-bg-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+  padding: 40px 0;
+  gap: 40px;
+}
+
+.header-image-side {
+  flex: 0 0 440px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 360px;
+}
+
+.header-img {
+  width: 100%;
+  max-width: 440px;
+  height: 340px;
+  object-fit: cover;
+  
+}
+
+.header-content-side {
+  flex: 1 1 0;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.book-section {
+  background-color: transparent;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1.2s;
+}
+
+.slide-up {
+  animation: slideUp 1s;
+}
+
+@media (max-width: 900px) {
+  .book-section {
+    padding: 14px 5px 8px 5px;
+  }
+  .banner {
+    padding: 14px 8px;
+  }
+  .animated-header h1 {
+    font-size: 2rem;
+  }
+  .search-bar {
+    width: 70vw;
+  }
+  .header-bg-flex {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+  }
+  .header-image-side {
+    height: 220px;
+  }
+  .header-img {
+    max-width: 220px;
+    height: 180px;
+  }
+  .header-content-side {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .homepage {
+    padding: 0;
+  }
+  .animated-header {
+    padding: 36px 0 16px 0;
+  }
+  .animated-header h1 {
+    font-size: 1.2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .search-bar-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .search-bar {
+    width: 90vw;
+    min-width: 0;
+    font-size: 1rem;
+    border-radius: 18px 18px 0 0;
+    border-right: 1px solid #dadada;
+  }
+  .search-btn {
+    width: 100%;
+    border-radius: 0 0 18px 18px;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+  .banner {
+    padding: 10px 4px;
+    font-size: 1rem;
+  }
+  .section-title {
+    font-size: 1rem;
+  }
+  .book-section {
+    padding: 8px 2px 6px 2px;
+  }
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  padding: 18px 32px 18px 32px;
+  border-radius: 12px;
+  margin: 24px auto 32px auto;
+  max-width: 900px;
+  
+}
+
+.filter-select {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  outline: none;
+}
+
+.filter-select:focus {
+  border: 1px solid #ddd;
+}
+
+.browse-btn {
+  padding: 8px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.browse-btn:hover {
+  background: #222;
+}
+
+@media (max-width: 700px) {
+  .filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 10px;
+    max-width: 98vw;
+  }
+}

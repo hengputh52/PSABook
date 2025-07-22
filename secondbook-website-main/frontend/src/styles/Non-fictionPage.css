@@ -1,0 +1,46 @@
+*{
+    font-family: sans-serif;
+  }
+  
+  .nonFiction-page {
+    padding: 20px;
+  }
+  
+  .nonFiction-banner {
+    background: url("../assets/nonfiction-banner.avif") center/cover ;
+    padding: 40px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 1px 1px 5px;
+    
+    
+  }
+  .nonFiction-banner h2{
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+  }
+  
+  .book-section {
+    margin-top: 20px;
+  
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+    margin: 20px;
+    border: 1px solid;
+    box-shadow: 3px 3px ;
+    padding: 5px;
+    
+  }
+  
+  .see-more {
+    text-align: center;
+    color: #777;
+    cursor: pointer;
+  }

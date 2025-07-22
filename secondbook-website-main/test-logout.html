@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logout API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .logout-btn {
+            background: #dc3545;
+        }
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        .response {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Logout API</h1>
+    
+    <div>
+        <h3>1. First Login (to get a token)</h3>
+        <p>Username: <input type="text" id="username" value="testuser" /></p>
+        <p>Password: <input type="password" id="password" value="testpass" /></p>
+        <button onclick="login()">Login</button>
+        <div id="loginResponse" class="response" style="display:none;"></div>
+    </div>
+
+    <div>
+        <h3>2. Test Logout</h3>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <div id="logoutResponse" class="response" style="display:none;"></div>
+    </div>
+
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/users/login', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                const responseDiv = document.getElementById('loginResponse');
+                responseDiv.style.display = 'block';
+                
+                if (response.ok) {
+                    responseDiv.innerHTML = `
+                        <h4 style="color: green;">✅ Login Successful!</h4>
+                        <p><strong>Message:</strong> ${data.message}</p>
+                        <p><strong>User:</strong> ${data.user.username}</p>
+                        <p><strong>Token received:</strong> ${data.token ? 'Yes' : 'No'}</p>
+                    `;
+                    
+                    // Store token for testing
+                    if (data.token) {
+                        localStorage.setItem('token', data.token);
+                    }
+                } else {
+                    responseDiv.innerHTML = `
+                        <h4 style="color: red;">❌ Login Failed</h4>
+                        <p><strong>Error:</strong> ${data.error}</p>
+                    `;
+                }
+            } catch (error) {
+                const responseDiv = document.getElementById('loginResponse');
+                responseDiv.style.display = 'block';
+                responseDiv.innerHTML = `
+                    <h4 style="color: red;">❌ Network Error</h4>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+
+        async function logout() {
+            try {
+                const token = localStorage.getItem('token');
+                
+                const response = await fetch('http://localhost:3000/api/users/logout', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { Authorization: `Bearer ${token}` } : {})
+                    }
+                });
+                
+                const data = await response.json();
+                
+                const responseDiv = document.getElementById('logoutResponse');
+                responseDiv.style.display = 'block';
+                
+                if (response.ok) {
+                    responseDiv.innerHTML = `
+                        <h4 style="color: green;">✅ Logout Successful!</h4>
+                        <p><strong>Message:</strong> ${data.message}</p>
+                    `;
+                    
+                    // Clear local storage
+                    localStorage.removeItem('token');
+                } else {
+                    responseDiv.innerHTML = `
+                        <h4 style="color: red;">❌ Logout Failed</h4>
+                        <p><strong>Error:</strong> ${data.error}</p>
+                    `;
+                }
+            } catch (error) {
+                const responseDiv = document.getElementById('logoutResponse');
+                responseDiv.style.display = 'block';
+                responseDiv.innerHTML = `
+                    <h4 style="color: red;">❌ Network Error</h4>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

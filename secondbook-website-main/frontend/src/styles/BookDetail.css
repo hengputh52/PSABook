@@ -1,0 +1,253 @@
+.book-detail {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.book-detail-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    background: white;
+    padding: 10px;
+    box-shadow: 3px 3px;
+    border: solid 1px;
+}
+
+.book-detail img {
+    max-width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: solid 1px;
+    transition: box-shadow 0.12s linear, transform 0.12s linear;
+    will-change: box-shadow, transform;
+}
+
+.book-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-info h2 {
+    font-size: 24px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+
+.book-info h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    border: none;
+    box-shadow: 0 0;
+    margin: 0;
+    text-align: start;
+}
+
+.book-info p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+}
+
+.buy-btn {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    box-shadow: 3px 3px rgb(199, 196, 194);
+    transition: background 0.12s linear, transform 0.12s linear;
+    will-change: background, transform;
+.buy-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+}
+
+.buy-btn:hover {
+    background-color: #0056b3;
+}
+
+.book-extra-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.book-extra {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    box-shadow: 3px 3px;
+    border: solid 1px;
+
+}
+
+.book-extra p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.book-extra strong {
+    font-weight: bold;
+}
+
+.seller-info {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.description-section {
+    flex: 2;
+    background: white;
+    padding: 15px;
+    box-shadow: 3px 3px;
+    border: solid 1px;
+
+}
+
+.description-section p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+/* BookList.css */
+.book-list-container {
+  padding: 20px;
+}
+
+.book-detail-flex {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.book-carousel {
+  position: relative;
+  width: 260px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.book-image {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px #0002;
+  margin: 0 24px;
+}
+.carousel-arrow {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  opacity: 0.8;
+  transition: background 0.2s;
+}
+.left-arrow {
+  left: 0;
+}
+.right-arrow {
+  right: 0;
+}
+.carousel-arrow:hover {
+  background: #444;
+}
+.book-info {
+  flex: 1;
+  min-width: 220px;
+}
+.book-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.book-author, .book-genre, .book-price {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+.book-extra-container {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+.book-extra {
+  min-width: 220px;
+}
+.seller-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.seller-link:hover {
+  color: #0056b3;
+}
+.description-section {
+  flex: 1;
+}
+.book-detail-btns {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.add-cart-btn, .buy-btn {
+  padding: 10px 28px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-cart-btn {
+  background: #fff;
+  color: #222;
+  border: 1.5px solid #222;
+}
+.add-cart-btn:hover {
+  background: #f2f2f2;
+}
+.buy-btn {
+  background: #222;
+  color: #fff;
+}
+.buy-btn:hover {
+  background: #444;
+}
+@media (max-width: 900px) {
+  .book-detail-flex, .book-extra-container, .book-detail-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+  .book-carousel {
+    margin-bottom: 18px;
+  }
+}

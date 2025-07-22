@@ -1,0 +1,290 @@
+.sell-now-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 30px;
+  border: 2px solid #000000;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: containerSlideIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.sell-now-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #000000 0%, #4169e1 50%, #000000 100%);
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes containerSlideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.98); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+.sell-now-container h2 {
+  text-align: center;
+  margin-bottom: 35px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.02em;
+  animation: titleSlideDown 0.6s ease-out 0.2s both;
+  position: relative;
+}
+
+.sell-now-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #4169e1;
+  border-radius: 2px;
+  animation: underlineExpand 0.8s ease-out 0.5s both;
+}
+
+@keyframes titleSlideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes underlineExpand {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+.sell-now-container form {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  animation: formSlideUp 0.8s ease-out 0.4s both;
+}
+
+@keyframes formSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-left,
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-left {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-left:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.form-right {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-right:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+  animation: labelFadeIn 0.5s ease-out;
+  position: relative;
+}
+
+label::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: #4169e1;
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+label:hover::before {
+  height: 20px;
+}
+
+@keyframes labelFadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  animation: inputSlideIn 0.4s ease-out;
+  position: relative;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4169e1;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+  transform: translateY(-1px);
+}
+
+input:hover,
+textarea:hover {
+  border-color: #000000;
+  transform: translateY(-1px);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: 'Inter', sans-serif;
+}
+
+@keyframes inputSlideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.book-preview {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  margin-top: 15px;
+  border: 3px solid #000000;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  animation: imageZoomIn 0.6s ease-out 1s both;
+}
+
+.book-preview:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  border-color: #4169e1;
+}
+
+@keyframes imageZoomIn {
+  from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+button {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #000000 0%, #333333 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 30px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  animation: buttonSlideIn 0.6s ease-out 1.2s both;
+  position: relative;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 200px;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #4169e1 0%, #6366f1 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(65, 105, 225, 0.3);
+}
+
+button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(65, 105, 225, 0.3);
+}
+
+@keyframes buttonSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sell-now-container {
+    margin: 20px;
+    padding: 25px 20px;
+  }
+  
+  .sell-now-container form {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .sell-now-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .form-left,
+  .form-right {
+    padding: 20px;
+  }
+}

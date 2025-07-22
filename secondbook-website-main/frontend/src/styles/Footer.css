@@ -1,0 +1,122 @@
+.footer {
+  background-color: black;
+  padding: 36px 20px 24px 20px;
+  text-align: left;
+  border-top: 1px solid #ededed;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 180px;
+  margin: 10px 18px;
+}
+
+.footer-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: white;
+  text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin: 6px 0;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.footer-section a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 9px 12px;
+  margin: 7px 0;
+  border-radius: 18px;
+  border: 1px solid #dadada;
+  background: #f7f7f7;
+  font-size: 1rem;
+  color: white;
+  transition: border 0.2s;
+}
+
+input[type="email"]:focus {
+  border: 1.5px solid #171a20;
+  background: #fff;
+  outline: none;
+}
+
+.subscribe-btn {
+  background: #171a20;
+  color: #fff;
+  padding: 9px 22px;
+  border: none;
+  border-radius: 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.04em;
+}
+
+.subscribe-btn:hover {
+  background: #393c41;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  margin-top: 32px;
+  border-top: 1px solid #ededed;
+  padding-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .footer-section {
+    min-width: 0;
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 24px 8px 16px 8px;
+  }
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.97rem;
+  }
+  .footer-bottom {
+    font-size: 0.9rem;
+    padding-top: 10px;
+    margin-top: 18px;
+  }
+}

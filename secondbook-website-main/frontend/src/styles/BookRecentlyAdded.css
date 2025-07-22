@@ -1,0 +1,121 @@
+.book-recently-added-container {
+  padding: 32px 0 40px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #f8fafc 60%, #e0e7ff 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.08);
+}
+
+.book-recently-added-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.book-recently-added-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 28px;
+  justify-content: center;
+}
+
+.book-card {
+  width: 210px;
+  min-height: 370px;
+  border-radius: 18px;
+  border: none;
+  text-align: center;
+  box-shadow: 0 6px 32px rgba(60, 60, 120, 0.13);
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.13s linear, box-shadow 0.13s linear;
+  will-change: transform, box-shadow;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(60, 60, 120, 0.14);
+  z-index: 2;
+}
+
+.book-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 2px 8px rgba(60, 60, 120, 0.07);
+}
+
+.book-card h3 {
+  font-size: 1.13rem;
+  color: #22223b;
+  margin: 14px 0 4px 0;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.book-card p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.view-details-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  font-size: 14px; /* Match button font size in BookList */
+  text-transform: uppercase; /* Make button text uppercase */
+}
+
+.view-details-btn:hover {
+
+.add-to-cart-btn {
+  background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  margin: 10px 0 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 8px rgba(60, 60, 120, 0.07);
+  cursor: pointer;
+  transition: background 0.12s linear, transform 0.12s linear;
+  will-change: background, transform;
+}
+.add-to-cart-btn:disabled {
+  background: #e0e7ff;
+  color: #a5b4fc;
+  cursor: not-allowed;
+}
+.add-to-cart-btn:not(:disabled):hover {
+  background: linear-gradient(90deg, #4f46e5 60%, #6366f1 100%);
+  transform: scale(1.03);
+}
+.book-card::before {
+  content: 'Best Pick';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, #fbbf24 60%, #f59e42 100%);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 16px 4px 12px;
+  border-radius: 0 0 16px 0;
+  letter-spacing: 0.04em;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(251,191,36,0.08);
+}
+  background-color: #444;
+}
