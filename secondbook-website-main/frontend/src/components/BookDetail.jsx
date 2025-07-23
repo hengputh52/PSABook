@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/BookDetail.css";
-import { fantasyBooks } from "./Book_fantasy";
-import { fictionBooks } from "./Fiction";
-import { historyBooks } from "./History";
-import { sciFiBooks } from "./BookSciFi";
-import { Non_fictionBooks } from "./Non_fiction";
-import { books } from "./BookList";
 import { hardcodedBooks } from "./BookRecentlyAdded";
 
 // Map genres to their respective book arrays
