@@ -6,7 +6,6 @@ import { hardcodedBooks } from "./BookRecentlyAdded";
 
 // Map genres to their respective book arrays
 const genres = {
-  fantasy: fantasyBooks,
   fiction: fictionBooks,
   history: historyBooks,
   "non-fiction": Non_fictionBooks,
