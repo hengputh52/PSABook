@@ -2,17 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/BookDetail.css";
-import { hardcodedBooks } from "./BookRecentlyAdded";
 
-// Map genres to their respective book arrays
-const genres = {
-  fiction: fictionBooks,
-  history: historyBooks,
-  "non-fiction": Non_fictionBooks,
-  "science-fiction": sciFiBooks,
-  general: books,
-  "recently-added": hardcodedBooks,
-};
 
 const BookDetail = () => {
   const { id } = useParams();
