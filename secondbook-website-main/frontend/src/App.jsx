@@ -7,6 +7,8 @@ import Nav from "./components/Nav"; // Import Nav component
 import HomePage from "./components/HomePage"; // Import HomePage component
 import SignUp from "./pages/SignUp"; // Import SignUp component
 import Profile from "./pages/Profile"; // Import Profile component
+import YourCart from "./pages/YourCart"; // Import YourCart component
+import BooksYouSell from "./pages/BooksYouSell"; // Import BooksYouSell component
 import Footer from "./components/Footer"; // Import Footer component
 import BookSciFi from "./components/BookSciFi"; // Import BookSciFi component
 import FantasyPage from "./components/Book_fantasyPage"; // Import Fantasy Page
@@ -31,6 +33,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/your-cart" element={<YourCart />} />
+        <Route path="/books-you-sell" element={<BooksYouSell />} />
         <Route path="/genres/science-fiction" element={<SciFiPage />} /> {/* Use BookSciFi for Sci-Fi genre */}
         <Route path="/genres/fantasy" element={<FantasyPage />} />
         <Route path="/genres/non-fiction" element={<NonFictionPage />} />

@@ -3,8 +3,6 @@ import "../styles/Profile.css";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState({});
-  const [cart, setCart] = useState([]);
-  const [booksYouSell, setBooksYouSell] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -13,11 +11,7 @@ const Profile = () => {
 
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("userProfile")) || {};
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const storedBooksYouSell = JSON.parse(localStorage.getItem("booksYouSell")) || [];
     setUserInfo(storedUserInfo);
-    setCart(storedCart);
-    setBooksYouSell(storedBooksYouSell);
   }, []);
 
   useEffect(() => {
@@ -61,12 +55,6 @@ const Profile = () => {
 
   const getApiUrl = () => {
     return import.meta.env.VITE_API_URL || "http://localhost:3000";
-  };
-
-  const handleRemoveFromCart = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const handleInputChange = (e) => {
@@ -160,13 +148,9 @@ const Profile = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("userProfile");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("booksYouSell");
 
       // Reset component state
       setUserInfo({});
-      setCart([]);
-      setBooksYouSell([]);
       setIsEditing(false);
       setFormData({});
       setPhotoPreview(null);
@@ -183,8 +167,6 @@ const Profile = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("userProfile");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("booksYouSell");
       alert("Logged out successfully!");
       window.location.href = "/";
     }
@@ -296,83 +278,6 @@ const Profile = () => {
         <p className="quote">
           "A reader lives a thousand lives before he dies. The man who never reads lives only one." – George R.R. Martin
         </p>
-      </div>
-
-      <h2 className="section-title">Your Cart</h2>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Book Title</th>
-              <th>Author</th>
-              <th>Genre</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.length > 0 ? (
-              cart.map((book) => (
-                <tr key={book.id}>
-                  <td>{book.title}</td>
-                  <td>{book.author || "N/A"}</td>
-                  <td>{book.genre || "N/A"}</td>
-                  <td>{book.description || "N/A"}</td>
-                  <td>{book.price}</td>
-                  <td>
-                    <button
-                      className="remove-btn"
-                      onClick={() => handleRemoveFromCart(book.id)}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6">Your cart is empty.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      <h2 className="section-title">Books You Sell</h2>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Genre</th>
-              <th>Price</th>
-              <th>Phone</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {booksYouSell.length > 0 ? (
-              booksYouSell.map((book) => (
-                <tr key={book.id}>
-                  <td>{book.bookTitle}</td>
-                  <td>{book.genre}</td>
-                  <td>{book.price}</td>
-                  <td>{book.phone}</td>
-                  <td>{book.description}</td>
-                  <td>
-                    <button onClick={() => handleRemoveFromBooksYouSell(book.id)}>Remove</button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6">No books added yet.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
       </div>
     </div>
   );

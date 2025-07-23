@@ -7,7 +7,6 @@ import "../styles/Nav.css";
 const Nav = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
-  const [showGenres, setShowGenres] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
 
@@ -69,33 +68,20 @@ const Nav = () => {
       <div className="nav-links">
         <Link to="/" className="nav-link">Home</Link>
 
-        <div
-          className="genres-menu"
-          onMouseEnter={() => setShowGenres(true)}
-          onMouseLeave={() => setShowGenres(false)}
-        >
-          <span className="nav-link genres-link">
-            Genres <span className="arrow">&#9662;</span>
-          </span>
-          <div className={`dropdown ${showGenres ? "show" : ""}`}>
-            <Link to="/genres/fiction">Fiction</Link>
-            <Link to="/genres/non-fiction">Non-Fiction</Link>
-            <Link to="/genres/science-fiction">Science Fiction</Link>
-            <Link to="/genres/history">History</Link>
-            <Link to="/genres/fantasy">Fantasy</Link>
-          </div>
-        </div>
-
         <Link to="/sell" className="nav-link sell-now-link rainbow-btn">
           Sell Now
         </Link>
 
         {isSignedIn ? (
-          <div className="profile-menu">
-            <Link to="/profile" className="profile-pic-link">
-              <img src={profilePicture} alt="Profile" className="profile-picture" />
-            </Link>
-          </div>
+          <>
+            <Link to="/your-cart" className="nav-link">Your Cart</Link>
+            <Link to="/books-you-sell" className="nav-link">Books You Sell</Link>
+            <div className="profile-menu">
+              <Link to="/profile" className="profile-pic-link">
+                <img src={profilePicture} alt="Profile" className="profile-picture" />
+              </Link>
+            </div>
+          </>
         ) : (
           <Link to="/signup" className="nav-link signup-link rainbow-btn">
             Sign Up
