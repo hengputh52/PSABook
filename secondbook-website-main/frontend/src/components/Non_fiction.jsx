@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import "../styles/BookList.css";
-import sapiens from "../assets/sapiens.jpg";
+import sapiens from "../assets/Sapiens.jpg";
 import educated from "../assets/educated-cover.jpg";
 import habit from "../assets/habit_non_fiction.jpg";
 import atomic from "../assets/automic.jpg";
