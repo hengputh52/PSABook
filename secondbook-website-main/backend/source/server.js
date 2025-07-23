@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import path from "path";
-import sequelize from "./config/database.js";
+import sequelize, { testConnection } from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import fakeDataRoutes from "./routes/fakeDataRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
@@ -137,32 +137,56 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Sync DB then start server
-sequelize.sync({ alter: false }).then(async () => {
+// Test database connection first, then sync DB and start server
+const startServer = async () => {
   console.log('\n' + '='.repeat(60));
-  console.log('🚀 PSA BOOK MARKETPLACE SERVER STARTED');
+  console.log('🚀 PSA BOOK MARKETPLACE SERVER STARTING');
   console.log('='.repeat(60));
-  console.log(`📅 Server started at: ${new Date().toISOString()}`);
-  console.log(`🌐 Server running on: http://localhost:3000`);
-  //console.log(`🔗 Database: Connected and synced`);
-  console.log(`📊 Monitoring: All activities logged`);
   
-  // Seed test books if database is empty
-  await seedTestBooks();
+  // Test database connection
+  console.log('🔗 Testing database connection...');
+  const isConnected = await testConnection();
   
-  console.log('='.repeat(60));
-  console.log('📝 Activity Log:');
-  console.log('─'.repeat(50));
-  
-  // Start the server
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`✅ Server is now listening on port ${PORT}`);
-  });
-}).catch(err => {
-  console.error('\n❌ Failed to sync database:', err);
-  console.error('🔧 Please check your database configuration');
-  process.exit(1);
-});
+  if (!isConnected) {
+    console.log('❌ Failed to connect to database. Exiting...');
+    process.exit(1);
+  }
+
+  try {
+    // Sync database
+    console.log('📊 Syncing database...');
+    await sequelize.sync({ alter: false });
+    console.log('✅ Database synced successfully');
+    
+    console.log('\n' + '='.repeat(60));
+    console.log('🚀 PSA BOOK MARKETPLACE SERVER STARTED');
+    console.log('='.repeat(60));
+    console.log(`📅 Server started at: ${new Date().toISOString()}`);
+    console.log(`🌐 Server running on: http://localhost:${PORT}`);
+    console.log(`🔗 Database: Connected and synced`);
+    console.log(`📊 Monitoring: All activities logged`);
+    
+    // Seed test books if database is empty
+    await seedTestBooks();
+    
+    console.log('='.repeat(60));
+    console.log('📝 Activity Log:');
+    console.log('─'.repeat(50));
+    
+    // Start the server
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`✅ Server is now listening on port ${PORT}`);
+    });
+    
+  } catch (error) {
+    console.log('❌ Failed to sync database:', error.message);
+    console.log('🔧 Please check your database configuration');
+    process.exit(1);
+  }
+};
+
+// Start the server
+startServer();
 
 // Error handling middleware
 app.use((error, req, res, next) => {

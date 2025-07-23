@@ -73,6 +73,9 @@ DB_USER=doadmin
 DB_PASSWORD=your-actual-db-password
 DB_NAME=your-actual-db-name
 
+# Alternative naming (if your code uses DB_Name instead of DB_NAME)
+# DB_Name=your-actual-db-name
+
 # Cloudinary (Your existing values)
 CLOUDINARY_CLOUD_NAME=dx4vm96l3
 CLOUDINARY_API_KEY=117933636656895
@@ -86,6 +89,28 @@ PORT=3000
 # CORS (Update after frontend deployment)
 FRONTEND_URL=https://your-frontend-app.ondigitalocean.app
 ```
+
+### ⚠️ Critical Database Setup Steps:
+
+#### Get Your Database Connection Details:
+1. **DigitalOcean Dashboard** → **Databases**
+2. Click your database cluster
+3. Go to **"Connection Details"** tab
+4. **IMPORTANT**: Use these EXACT values:
+   ```
+   Host: db-mysql-xxx-do-user-xxxxx-0.b.db.ondigitalocean.com
+   Port: 25060
+   User: doadmin
+   Password: [copy the generated password exactly]
+   Database: defaultdb (or your custom name)
+   ```
+
+#### Database Security Settings:
+1. In your database dashboard, go to **"Settings"**
+2. Under **"Trusted Sources"**, add:
+   - **All DigitalOcean Droplets** (recommended)
+   - Or specific App Platform IP ranges
+3. Ensure **SSL** is enabled (it's required)
 
 ## Step 5: Deploy and Test
 
