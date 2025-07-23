@@ -1,6 +1,6 @@
 import React from "react";
 import BookList from "./BookList";
-import "../styles/fantasyPage.css";
+import "../styles/FantasyPage.css";
 import Book_fantasy from "./Book_fantasy";
 
 const Book_fantasyPage = () => {
