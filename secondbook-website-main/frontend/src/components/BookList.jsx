@@ -6,8 +6,6 @@ import meet14 from "../assets/meet14year cover.jpg";
 import theboys from "../assets/theboys cover.jpg";
 import allthelight from "../assets/all the light we cannot see cover.jpg";
 import gameofthrone from "../assets/gameofthrone cover.jpg";
-import mastery from "../assets/mastery cover.jpg";
-import spiderman from "../assets/spiderman_orig.jpg";
 import harry from "../assets/harry.jpg";
 
 export const books = [
@@ -79,28 +77,6 @@ export const books = [
   },
   {
     id: 7,
-    title: "Mastery",
-    price: "2$",
-    image: mastery,
-    description: "A book on achieving mastery by Robert Greene.",
-    author: "Robert Greene",
-    seller: "Self-Help Books",
-    telephone: "999-888-7777",
-    address: "202 Mastery Blvd, San Francisco, CA"
-  },
-  {
-    id: 8,
-    title: "Spider-Man",
-    price: "2$",
-    image: spiderman,
-    description: "A comic book about Spider-Man.",
-    author: "Stan Lee",
-    seller: "Marvel Comics",
-    telephone: "333-444-5555",
-    address: "303 Comics Ln, New York, NY"
-  },
-  {
-    id: 9,
     title: "Meet 14-Year-Old Me",
     price: "2$",
     image: meet14,
@@ -111,7 +87,7 @@ export const books = [
     address: "404 Teen St, Chicago, IL"
   },
   {
-    id: 10,
+    id: 8,
     title: "Meet 14-Year-Old Me",
     price: "2$",
     image: harry,

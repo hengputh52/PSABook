@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Routes, Route } from "react-router-dom";
 import InputInformation from "./components/InputInformation"; // Import InputInformation component
 import SellNow from "./components/SellNow"; // Import SellNow component
@@ -10,7 +10,6 @@ import Profile from "./pages/Profile"; // Import Profile component
 import YourCart from "./pages/YourCart"; // Import YourCart component
 import BooksYouSell from "./pages/BooksYouSell"; // Import BooksYouSell component
 import Footer from "./components/Footer"; // Import Footer component
-import BookSciFi from "./components/BookSciFi"; // Import BookSciFi component
 import FantasyPage from "./components/Book_fantasyPage"; // Import Fantasy Page
 import NonFictionPage from "./components/Non_fictionPage"; // Import Non-fiction Page
 import FictionPage from "./components/FictionPage"; // Import Fiction Page
