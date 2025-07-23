@@ -14,12 +14,25 @@ Error: Cannot find module '/workspace/secondbook-website-main/frontend/node_modu
 - DigitalOcean's build process may not install dev dependencies in production builds
 - Path resolution issues between different environments
 
+### Issue 2: "Cannot find package '@vitejs/plugin-react'"
+
+**Error Message:**
+```
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react' imported from /workspace/secondbook-website-main/frontend/vite.config.js
+```
+
+**Root Cause:**
+- `@vitejs/plugin-react` was in `devDependencies` but needed during build
+- DigitalOcean production builds don't install devDependencies by default
+- Vite config file imports this plugin, so it must be available during build
+
 **Solutions Applied:**
 
-1. **Move Vite to Dependencies:**
+1. **Move Build Dependencies to Dependencies:**
    ```json
    "dependencies": {
-     "vite": "^4.3.0"
+     "vite": "^4.3.0",
+     "@vitejs/plugin-react": "^3.1.0"
    }
    ```
 
@@ -88,6 +101,7 @@ npm run build-node   # Programmatic approach
   },
   "dependencies": {
     "vite": "^4.3.0",
+    "@vitejs/plugin-react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
