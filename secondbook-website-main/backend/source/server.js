@@ -2,13 +2,10 @@ import express from "express";
 import mysql from "mysql2/promise";
 import cors from "cors";
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import path from "path";
 import sequelize, { testConnection } from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
-import fakeDataRoutes from "./routes/fakeDataRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import { seedTestBooks } from "./scripts/seedTestBooks.js";
@@ -124,7 +121,6 @@ app.use((req, res, next) => {
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api/users", userRoutes);
-app.use("/api/fake", fakeDataRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
 
