@@ -29,51 +29,6 @@
 .signup-btn img.logo-icon {
   width: 20px;
   height: 20px;
-  
-}
-.logo-icon-facebook{
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.logo-icon-apple{
-  width: 20px;
-
-
-}
-
-.signup-btn.google {
-  background-color: white;
-  color: black;
-  border: 1px solid;
-  box-shadow: 5px 5px ;
-}
-
-.signup-btn.google:hover {
-  background-color: #357ae8;
-}
-
-.signup-btn.facebook {
-  background-color: #1877f2;
-  color: white;
-  box-shadow: 5px 5px #1877f2;
-}
-
-.signup-btn.facebook:hover {
-  background-color: #155dbb;
-}
-
-.signup-btn.apple {
-  background-color: black;
-  color: white;
-  border: solid 1px black;
-  box-shadow: 5px 5px #333;
-
-}
-
-.signup-btn.apple:hover {
-  background-color: #333;
 }
 
 .login-text {
@@ -103,50 +58,13 @@
   z-index: 1000;
 }
 
-.signup-input {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  background: #fafafa;
-  outline: none;
-  transition: border 0.2s;
-  color: #222;
-}
-
-.signup-input:not(:last-child) {
-  border-bottom: none;
-}
-
-.submit-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-}
-
 /* Container for split auth page */
 .auth-split-container {
   display: flex;
   width: 100%;
   min-height: 100vh;
-    background-color: #ffffff;
-background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
   position: relative;
   overflow: hidden;
   perspective: 1200px;
@@ -166,14 +84,11 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   justify-content: center;
   min-width: 320px;
   padding: 40px 0;
-  
-    background-color: #ffffff;
-background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
   transition: box-shadow 0.6s cubic-bezier(.68,-0.55,.27,1.55);
   z-index: 1;
 }
-
-
 
 /* Animation for form pop-in */
 .auth-split-container.swapped .right-side .auth-form,
@@ -205,7 +120,7 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   max-width: 340px;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 5px;
   background: #fff;
   border-radius: 12px;
   padding: 32px 28px;
@@ -218,7 +133,6 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   align-items: stretch;
   justify-content: stretch;
   width: 60%;
-  
 }
 
 /* Image fills its side */
@@ -253,7 +167,7 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   margin-bottom: 8px;
 }
 
-/* Input styling */
+/* Input styling - CONSOLIDATED AND FIXED */
 .signup-input {
   display: block;
   width: 100%;
@@ -267,11 +181,16 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   transition: border 0.2s;
 }
 
+
+.signup-input:not(:last-child) {
+  border-bottom: none;
+}
+
 .signup-input:focus {
   border: 1.5px solid #888;
 }
 
-/* Button styling */
+/* Button styling - CONSOLIDATED */
 .submit-btn {
   padding: 10px 0;
   border-radius: 6px;

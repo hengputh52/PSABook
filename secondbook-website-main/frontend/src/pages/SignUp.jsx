@@ -153,10 +153,19 @@ const SignUp = () => {
               value={userInfo.email}
               onChange={handleInputChange}
               className="signup-input"
+              style={
+                {
+                  color:'#ddd',
+                  WebkitTextFillColor: '#000',
+                  background: '#fafafa',
+                  outline: 'none',
+                  borderRadius: '6px'
+                }
+              }
             />
 
             <button className="submit-btn" type="submit">
-              Submit
+              Sign Up
             </button>
             <p className="swap-text">
               Already have an account?{" "}
