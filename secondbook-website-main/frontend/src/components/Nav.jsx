@@ -1,6 +1,6 @@
 // frontend/components/Nav.js
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { fetchCurrentUser } from "../service/userApi";
 import "../styles/Nav.css";
 
@@ -9,6 +9,10 @@ const Nav = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the current path for active styling
+  const currentPath = location.pathname;
 
   useEffect(() => {
     const checkAuth = () => {
@@ -66,16 +70,16 @@ const Nav = () => {
         <span className="logo-bold">BOOK</span>
       </Link>
       <div className="nav-links">
-        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/" className={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</Link>
 
-        <Link to="/sell" className="nav-link sell-now-link rainbow-btn">
+        <Link to="/sell" className={`nav-link sell-now-link rainbow-btn ${currentPath === '/sell' ? 'active' : ''}`} >
           Sell Now
         </Link>
 
         {isSignedIn ? (
           <>
-            <Link to="/your-cart" className="nav-link">Your Cart</Link>
-            <Link to="/books-you-sell" className="nav-link">Books You Sell</Link>
+            <Link to="/your-cart" className={`nav-link ${currentPath === '/your-cart' ? 'active' : ''}`}>Your Cart</Link>
+            <Link to="/books-you-sell" className={`nav-link ${currentPath === '/books-you-sell' ? 'active' : ''}`}>Books You Sell</Link>
             <div className="profile-menu">
               <Link to="/profile" className="profile-pic-link">
                 <img src={profilePicture} alt="Profile" className="profile-picture" />
@@ -83,7 +87,7 @@ const Nav = () => {
             </div>
           </>
         ) : (
-          <Link to="/signup" className="nav-link signup-link rainbow-btn">
+          <Link to="/signup" className={`nav-link signup-link rainbow-btn ${currentPath === '/signup' ? 'active' : ''}`}>
             Sign Up
           </Link>
         )}

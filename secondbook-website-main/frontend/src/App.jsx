@@ -1,7 +1,7 @@
 
 import { Routes, Route } from "react-router-dom";
 import InputInformation from "./components/InputInformation"; // Import InputInformation component
-import SellNow from "./components/SellNow"; // Import SellNow component
+import SellNow from "./pages/SellNow"; // Import SellNow component
 import BookDetail from "./components/BookDetail";
 import Nav from "./components/Nav"; // Import Nav component
 import HomePage from "./components/HomePage"; // Import HomePage component
@@ -39,7 +39,8 @@ function App() {
         <Route path="/genres/non-fiction" element={<NonFictionPage />} />
         <Route path="/genres/fiction" element={<FictionPage />} />
         <Route path="/genres/history" element={<HistoryPage />} />
-        <Route path="/book/:genre/:id" element={<BookDetail />} /> {/* Correct route for BookDetail */}
+        <Route path="/book/:id" element={<BookDetail />} /> {/* Generic route for any book */}
+        <Route path="/book/:genre/:id" element={<BookDetail />} /> {/* Route with genre for BookDetail */}
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
         <Route path="/payment" element={<PaymentPage />} />

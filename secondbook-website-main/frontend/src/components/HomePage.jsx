@@ -108,12 +108,7 @@ const HomePage = () => {
         </button>
       </div>
 
-      {/* Best Picks Section */}
-      <section className="book-section slide-up">
-        <h3 className="section-title">🌟 Best Picks</h3>
-        <BookList filter={filter} searchTerm={searchTerm} />
-        <p className="see-more pulse">see more</p>
-      </section>
+    
 
       {/* Recently Added Section */}
       <section

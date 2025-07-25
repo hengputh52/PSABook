@@ -90,14 +90,14 @@ const BookDetail = () => {
           <p>
             <strong>Seller Name:</strong>{" "}
             <span className="seller-link" onClick={handleSellerClick}>
-              {book.seller || "Not Available"}
+              {book.seller || book.author || "Not Available"}
             </span>
           </p>
           <p>
-            <strong>Telephone 1:</strong> {book.telephone1 || book.telephone || "Not Available"}
+            <strong>Contact Info:</strong> {book.contact_info || book.telephone1 || book.telephone || "Not Available"}
           </p>
           <p>
-            <strong>Telephone 2:</strong> {book.telephone2 || "Not Available"}
+            <strong>Additional Contact:</strong> {book.telephone2 || "Not Available"}
           </p>
           <p>
             <strong>Address:</strong> {book.address || "Not Available"}

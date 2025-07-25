@@ -1,5 +1,6 @@
 import axios from "axios"
-const API_URL = "http://localhost:3000/api/books";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = `${API_BASE}/api/books`;
 
 // Fetch all books
 export const fetchBooks = async () => {
@@ -20,6 +21,7 @@ export const createBook = async (bookData) => {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include", // Include cookies for authentication
     body: JSON.stringify(bookData),
   });
   if (!res.ok) throw new Error("Failed to create book");

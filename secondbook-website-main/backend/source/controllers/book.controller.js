@@ -19,7 +19,21 @@ export const getGenres = async (req, res) => {
 // Create (Sell) a Book
 export const sellBook = async (req, res) => {
   try {
+    console.log("📚 SELL BOOK REQUEST:");
+    console.log("👤 Authenticated User:", req.user);
+    console.log("📦 Request Body:", req.body);
+    
+    // Check if user is properly authenticated
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ error: "User authentication failed" });
+    }
+    
     const { images, ...bookData } = req.body;
+    
+    // Add seller_id from authenticated token (matches Book model field name)
+    bookData.seller_id = req.user.id;
+    
+    console.log("📊 Final Book Data:", bookData);
     
     // Validate genre
     if (bookData.genre && !GENRE_VALUES.includes(bookData.genre)) {
@@ -39,8 +53,10 @@ export const sellBook = async (req, res) => {
       await BookImage.bulkCreate(imageRecords);
     }
 
+    console.log("✅ Book created successfully:", book.book_id);
     res.status(201).json(book);
   } catch (err) {
+    console.error("❌ Error creating book:", err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -120,6 +136,26 @@ export const getBooksByGenre = async (req, res) => {
   }
 };
 
+// Get books sold by the current user
+export const getMyBooks = async (req, res) => {
+  try {
+    console.log("📚 GET MY BOOKS REQUEST:");
+    console.log("👤 Authenticated User:", req.user);
+    
+    const books = await Book.findAll({
+      where: { seller_id: req.user.id },
+      include: [{ model: BookImage }],
+      order: [['listed_at', 'DESC']],
+    });
+    
+    console.log(`📊 Found ${books.length} books for user ${req.user.id}`);
+    res.json(books);
+  } catch (err) {
+    console.error("❌ Error fetching user's books:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 export const deleteBook = async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
@@ -128,6 +164,30 @@ export const deleteBook = async (req, res) => {
     await book.destroy();
     res.json({ message: "Book deleted" });
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Upload multiple book images
+export const uploadBookImages = async (req, res) => {
+  try {
+    console.log("📷 UPLOAD BOOK IMAGES REQUEST:");
+    console.log("📦 Files:", req.files);
+    
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "No files uploaded" });
+    }
+
+    // Extract image URLs from uploaded files
+    const imageUrls = req.files.map(file => file.path);
+    
+    console.log("✅ Images uploaded successfully:", imageUrls);
+    res.status(200).json({ 
+      message: "Images uploaded successfully",
+      images: imageUrls 
+    });
+  } catch (err) {
+    console.error("❌ Error uploading images:", err);
     res.status(500).json({ error: err.message });
   }
 };

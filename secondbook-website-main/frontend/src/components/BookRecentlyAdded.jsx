@@ -64,7 +64,7 @@ const BookRecentlyAdded = () => {
         {recentlyAddedBooks.map((book) => (
           <div className="book-card" key={book.book_id || book.id}>
             <Link to={`/book/${book.book_id || book.id}`}>
-              <img src={book.image || (book.BookImages && book.BookImages[0]?.image_url)} alt={book.title} className="book-image" />
+              <img src={book.image || (book.BookImages && book.BookImages[0]?.image_url)} alt={book.title} className="book-image"  style={{marginLeft: 0}}/>
               <h3>{book.title}</h3>
               <p>${Number(book.price).toFixed(2)}</p>
             </Link>
