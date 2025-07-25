@@ -9,6 +9,7 @@
 .env.staging
 backend/source/.env
 frontend/.env
+.env
 
 # Dependencies
 node_modules/
