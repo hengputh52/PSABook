@@ -53,9 +53,9 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
 .search-bar-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 36px 0 24px 0;
-  gap: 0;
+  
+  
+
 }
 
 .search-bar {
@@ -83,7 +83,7 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   color: #fff;
   border: 1px solid #171a20;
   border-radius: 0 24px 24px 0;
-  padding: 8px 18px;
+  padding: 8px 10px;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -91,6 +91,8 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
   letter-spacing: 0.05em;
   margin-bottom: 0;
   margin-top: 0;
+  margin-left: 0;
+  width: 100px;
 }
 
 .search-btn:hover {
