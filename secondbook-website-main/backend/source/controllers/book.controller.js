@@ -62,10 +62,14 @@ export const sellBook = async (req, res) => {
 };
 
 // Get a Book by ID (with images)
-export const getBook = async (req, res) => {
+export const getBookById = async (req, res) => {
   try {
-    const book = await Book.findByPk(req.params.id, {
-      include: [{ model: BookImage }]
+    const { id } = req.params;
+    const book = await Book.findByPk(id, {
+      include: 
+      [{ model: BookImage },
+        {model: User, attributes: ['id', 'name ','email', 'photo']}
+      ]
     });
     if (!book) return res.status(404).json({ error: "Book not found" });
     res.json(book);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/BookDetail.css";
+import { fetchBookById } from "../service/bookApi";
 
 
 const BookDetail = () => {
@@ -10,21 +11,20 @@ const BookDetail = () => {
   const [book, setBook] = useState(null);
   const [currentImg, setCurrentImg] = useState(0);
   const [images, setImages] = useState([]);
+  
   useEffect(() => {
     const fetchBook = async () => {
-      try {
-        const base = import.meta.env.VITE_API_BASE || "http://localhost:3000";
-        const res = await axios.get(`${base}/api/books/${id}`);
-        setBook(res.data);
-        // If book has BookImages array, use those; else fallback to image/bookImage
-        if (res.data.BookImages && res.data.BookImages.length > 0) {
-          setImages(res.data.BookImages.map(img => img.image_url));
-        } else {
-          setImages([res.data.image || res.data.bookImage]);
-        }
-      } catch (err) {
-        setBook(null);
+      try
+      {
+        const data = await fetchBookById(id);
+        setBook(data);
       }
+      catch (err)
+      {
+        console.error("Error Loading book:", err.message);
+      }
+    
+
     };
     fetchBook();
   }, [id]);

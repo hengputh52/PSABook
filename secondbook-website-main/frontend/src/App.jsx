@@ -2,9 +2,9 @@
 import { Routes, Route } from "react-router-dom";
 import InputInformation from "./components/InputInformation"; // Import InputInformation component
 import SellNow from "./pages/SellNow"; // Import SellNow component
-import BookDetail from "./components/BookDetail";
+import BookDetail from "./pages/BookDetail";
 import Nav from "./components/Nav"; // Import Nav component
-import HomePage from "./components/HomePage"; // Import HomePage component
+import HomePage from "./pages/HomePage"; // Import HomePage component
 import SignUp from "./pages/SignUp"; // Import SignUp component
 import Profile from "./pages/Profile"; // Import Profile component
 import YourCart from "./pages/YourCart"; // Import YourCart component

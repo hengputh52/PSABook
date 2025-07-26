@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import BookList from "./BookList";
+import BookList from "../components/BookList";
 import "../styles/HomePage.css";
-import BookRecentlyAdded from "./BookRecentlyAdded";
+import BookRecentlyAdded from "../components/BookRecentlyAdded";
 
 const genres = [
   "All",
