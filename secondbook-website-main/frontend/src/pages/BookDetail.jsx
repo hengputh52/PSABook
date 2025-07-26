@@ -127,7 +127,7 @@ const BookDetail = () => {
               src={book.Seller.profile_photo}
               alt="Seller Profile"
               className="seller-profile-img"
-              style={{ width: "100px", borderRadius: "50%", marginTop: "10px" }}
+              style={{ width: "50px", borderRadius: "50%", marginTop: "10px" }}
             />
           )}
         </div>
