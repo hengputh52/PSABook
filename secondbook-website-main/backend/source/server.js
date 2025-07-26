@@ -8,7 +8,7 @@ import sequelize, { testConnection } from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
-import { seedTestBooks } from "./scripts/seedTestBooks.js";
+
 
 // Load environment variables
 dotenv.config();
@@ -162,8 +162,6 @@ const startServer = async () => {
     console.log(`🔗 Database: Connected and synced`);
     console.log(`📊 Monitoring: All activities logged`);
     
-    // Seed test books if database is empty
-    await seedTestBooks();
     
     console.log('='.repeat(60));
     console.log('📝 Activity Log:');
