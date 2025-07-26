@@ -16,10 +16,11 @@ const BookDetail = () => {
       try {
         const data = await fetchBookById(id);
         setBook(data);
-        const imageUrls = data.BookImages?.map(img => img.image_url) || [];
+
+        const imageUrls = data.BookImages?.map((img) => img.image_url) || [];
         setImages(imageUrls.length > 0 ? imageUrls : ["/placeholder.png"]);
       } catch (err) {
-        console.error("Error Loading book:", err.message);
+        console.error("Error loading book:", err.message);
       }
     };
     fetchBook();
@@ -42,7 +43,7 @@ const BookDetail = () => {
   const handleAddToCart = async () => {
     try {
       const user = JSON.parse(localStorage.getItem("userProfile"));
-      if (!user || !user.user_id) {
+      if (!user?.user_id) {
         alert("Please log in to add to cart.");
         return;
       }
@@ -61,34 +62,45 @@ const BookDetail = () => {
   };
 
   const handleSellerClick = () => {
-    if (book.Seller && book.Seller.user_id) {
-      navigate(`/profile/${book.Seller.user_id}`, { state: { seller: book.Seller } });
+    if (book.Seller?.user_id) {
+      navigate(`/profile/${book.Seller.user_id}`, {
+        state: { seller: book.Seller },
+      });
     }
   };
 
   return (
     <div className="book-detail">
       <div className="book-detail-container book-detail-flex">
-        {/* Left: Image carousel */}
+        {/* Left: Image Carousel */}
         <div className="book-carousel">
-          <button className="carousel-arrow left-arrow" onClick={handlePrevImg}>&lt;</button>
+          <button className="carousel-arrow left-arrow" onClick={handlePrevImg}>
+            &lt;
+          </button>
           <img
             src={images[currentImg]}
             alt={book.title || "Book Cover"}
             className="book-image"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/placeholder.png";
+            }}
           />
-          <button className="carousel-arrow right-arrow" onClick={handleNextImg}>&gt;</button>
+          <button className="carousel-arrow right-arrow" onClick={handleNextImg}>
+            &gt;
+          </button>
         </div>
 
-        {/* Right: Book info */}
+        {/* Right: Book Info */}
         <div className="book-info">
-          <h2 className="book-title">{book.title || book.bookTitle}</h2>
-          <h3 className="book-author">By {book.author || "Unknown"}</h3>
-          <h3 className="book-genre">{book.genre}</h3>
+          <h2 className="book-title">{book.title || "Untitled"}</h2>
+          <h3 className="book-author">By {book.author || "Unknown Author"}</h3>
+          <h3 className="book-genre">{book.genre || "Unknown Genre"}</h3>
           <p className="book-price"><strong>Price:</strong> ${book.price}</p>
         </div>
       </div>
 
+      {/* Seller Info & Description */}
       <div className="book-extra-container">
         <div className="book-extra">
           <p>
@@ -102,17 +114,22 @@ const BookDetail = () => {
             )}
           </p>
           <p>
-            <strong>Contact Info:</strong>{" "}
-            {book.Seller?.email || book.contact_info || "Not Available"}
+            <strong>Email:</strong> {book.Seller?.email || "Not Available"}
           </p>
           <p>
-            <strong>Phone:</strong>{" "}
-            {book.Seller?.phone_number || book.telephone || "Not Available"}
+            <strong>Phone:</strong> {book.Seller?.phone_number || "Not Available"}
           </p>
           <p>
-            <strong>Address:</strong>{" "}
-            {book.Seller?.address || book.address || "Not Available"}
+            <strong>Address:</strong> {book.Seller?.address || "Not Available"}
           </p>
+          {book.Seller?.profile_photo && (
+            <img
+              src={book.Seller.profile_photo}
+              alt="Seller Profile"
+              className="seller-profile-img"
+              style={{ width: "100px", borderRadius: "50%", marginTop: "10px" }}
+            />
+          )}
         </div>
 
         <div className="description-section">
@@ -120,6 +137,7 @@ const BookDetail = () => {
         </div>
       </div>
 
+      {/* Buttons */}
       <div className="book-detail-btns">
         <button className="add-cart-btn" onClick={handleAddToCart}>
           Add to Cart

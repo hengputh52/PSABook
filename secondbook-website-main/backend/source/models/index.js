@@ -9,7 +9,7 @@ User.hasMany(Book, { foreignKey: "seller_id", onDelete: "CASCADE" });
 Book.belongsTo(User, { foreignKey: "seller_id", as: "Seller" });
 
 // Book & BookImage
-Book.hasMany(BookImage, { foreignKey: "book_id", onDelete: "CASCADE" });
+Book.hasMany(BookImage, { foreignKey: "book_id",a: "BookImages", onDelete: "CASCADE" });
 BookImage.belongsTo(Book, { foreignKey: "book_id" });
 
 // User & CartItem

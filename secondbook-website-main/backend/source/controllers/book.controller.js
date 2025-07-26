@@ -61,26 +61,33 @@ export const sellBook = async (req, res) => {
   }
 };
 
-// Get a Book by ID (with images)
+
+// Get book by ID with images and seller info
 export const getBookById = async (req, res) => {
   try {
-    const { bookId } = req.params;
-    const book = await Book.findOne(bookId, {
-    include:[
-      {
-      model: User,
-      attributes: ["user_id", "username", "email","address", "phone_number"],
-      },
-      {
-        model: BookImage,
-        attributes: ["image_url"]
-      }
-    ],
-    })
-    if (!book) return res.status(404).json({ error: "Book not found" });
+    const book = await Book.findByPk(req.params.id, {
+      include: [
+        {
+          model: BookImage,
+          as: "BookImages",
+          attributes: ["image_id", "image_url"],
+        },
+        {
+          model: User,
+          as: "Seller",
+          attributes: ["user_id", "username", "email", "full_name", "profile_photo", "phone_number"],
+        },
+      ],
+    });
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
     res.json(book);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("❌ Error fetching book:", err.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
