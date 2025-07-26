@@ -167,6 +167,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   border:none;
+  text-decoration: none;
 }
 
 .books-you-sell-price {
