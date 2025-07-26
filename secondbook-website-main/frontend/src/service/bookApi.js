@@ -2,12 +2,33 @@ import axios from "axios"
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const API_URL = `${API_BASE}/api/books`;
 
-// Fetch all books
-export const fetchBooks = async () => {
-  const res = await fetch(API_URL);
-  if (!res.ok) throw new Error("Failed to fetch books");
+// Fetch recent book 
+// export const fetchBooks = async () => {
+//   const res = await fetch(API_URL);
+//   if (!res.ok) throw new Error("Failed to fetch books");
+//   return res.json();
+// };
+
+
+
+// Fetch recent books with optional limit, offset, and genre
+export const fetchRecentBooks = async ({ limit = 8, offset = 0, genre = "" } = {}) => {
+  const url = new URL(`${API_URL}/recent`);
+  url.searchParams.append("limit", limit);
+  url.searchParams.append("offset", offset);
+  if (genre) {
+    url.searchParams.append("genre", genre);
+  }
+
+  const res = await fetch(url.toString());
+  if (!res.ok) throw new Error("Failed to fetch recent books");
   return res.json();
 };
+
+
+
+
+
 
 // Fetch a single book by ID
 export const fetchBookById = async (id) => {
@@ -47,3 +68,6 @@ export const deleteBook = async (id) => {
   if (!res.ok) throw new Error("Failed to delete book");
   return res.json();
 };
+
+
+

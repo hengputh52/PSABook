@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import "../styles/BookRecentlyAdded.css";
 import axios from "axios";
+import { fetchRecentBooks } from "../service/bookApi";
 
 // kept for backward compatibility
 export const hardcodedBooks = [];
@@ -11,36 +12,64 @@ const BookRecentlyAdded = () => {
   const [offset, setOffset] = useState(0);
   const limit = 8;
 
-  useEffect(() => {
-    const fetchRecent = async (newOffset = 0, append = false) => {
-      try {
-        const base = "http://localhost:3000"; // Updated to match backend port
-        const res = await axios.get(`${base}/api/books/recent?limit=${limit}&offset=${newOffset}`);
-        console.log('Recent books response:', res.data); // Debug log
-        setRecentlyAddedBooks(prev => append ? [...prev, ...res.data] : res.data);
-      } catch (err) {
-        console.error("Failed to load recent books", err);
-        // Fallback to localStorage for backward compatibility
-        const localBooks = JSON.parse(localStorage.getItem("recentlyAddedBooks")) || [];
-        if (localBooks.length > 0) {
-          setRecentlyAddedBooks(localBooks.slice(newOffset, newOffset + limit));
-        }
-      }
-    };
-    fetchRecent(0, false);
-  }, []);
+  // useEffect(() => {
+  //   const fetchRecent = async (newOffset = 0, append = false) => {
+  //     try {
+  //       const base = "http://localhost:3000"; // Updated to match backend port
+  //       const res = await axios.get(`${base}/api/books/recent?limit=${limit}&offset=${newOffset}`);
+  //       console.log('Recent books response:', res.data); // Debug log
+  //       setRecentlyAddedBooks(prev => append ? [...prev, ...res.data] : res.data);
+  //     } catch (err) {
+  //       console.error("Failed to load recent books", err);
+  //       // Fallback to localStorage for backward compatibility
+  //       const localBooks = JSON.parse(localStorage.getItem("recentlyAddedBooks")) || [];
+  //       if (localBooks.length > 0) {
+  //         setRecentlyAddedBooks(localBooks.slice(newOffset, newOffset + limit));
+  //       }
+  //     }
+  //   };
+  //   fetchRecent(0, false);
+  // }, []);
 
-  const handleSeeMore = async () => {
-    const newOffset = offset + limit;
+  useEffect(() => {
+  const fetchRecent = async (newOffset = 0, append = false) => {
     try {
-      const base = "http://localhost:3000";
-      const res = await axios.get(`${base}/api/books/recent?limit=${limit}&offset=${newOffset}`);
-      setRecentlyAddedBooks(prev => [...prev, ...res.data]);
-      setOffset(newOffset);
+      const books = await fetchRecentBooks({ limit, offset: newOffset });
+      setRecentlyAddedBooks(prev => append ? [...prev, ...books] : books);
     } catch (err) {
-      console.error("Failed to load more books", err);
+      console.error("Failed to load recent books", err);
+      const localBooks = JSON.parse(localStorage.getItem("recentlyAddedBooks")) || [];
+      if (localBooks.length > 0) {
+        setRecentlyAddedBooks(localBooks.slice(newOffset, newOffset + limit));
+      }
     }
   };
+  fetchRecent(0, false);
+}, []);
+
+  // const handleSeeMore = async () => {
+  //   const newOffset = offset + limit;
+  //   try {
+  //     const base = "http://localhost:3000";
+  //     const res = await axios.get(`${base}/api/books/recent?limit=${limit}&offset=${newOffset}`);
+  //     setRecentlyAddedBooks(prev => [...prev, ...res.data]);
+  //     setOffset(newOffset);
+  //   } catch (err) {
+  //     console.error("Failed to load more books", err);
+  //   }
+  // };
+
+
+  const handleSeeMore = async () => {
+  const newOffset = offset + limit;
+  try {
+    const moreBooks = await fetchRecentBooks({ limit, offset: newOffset });
+    setRecentlyAddedBooks(prev => [...prev, ...moreBooks]);
+    setOffset(newOffset);
+  } catch (err) {
+    console.error("Failed to load more books", err);
+  }
+};
 
   const handleAddToCart = (book) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
