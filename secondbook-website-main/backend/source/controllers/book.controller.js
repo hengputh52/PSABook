@@ -1,4 +1,4 @@
-import { Book, BookImage } from "../models/index.js";
+import { Book, BookImage, User } from "../models/index.js";
 import { GENRE_VALUES } from "../utils/genreList.js";
 
 // Get all available genres
@@ -64,11 +64,14 @@ export const sellBook = async (req, res) => {
 // Get a Book by ID (with images)
 export const getBookById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const book = await Book.findByPk(id, {
+    const { bookId } = req.params;
+    const book = await Book.findByPk(bookId, {
       include: 
-      [{ model: BookImage },
-        {model: User, attributes: ['id', 'name ','email', 'photo']}
+      [{ model: BookImage, 
+        
+       },
+        
+        {model: User, as: "Seller", attributes: [ 'username ','email']}
       ]
     });
     if (!book) return res.status(404).json({ error: "Book not found" });

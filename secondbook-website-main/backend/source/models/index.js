@@ -6,7 +6,7 @@ import Transaction from "./transcation.js";
 
 // User & Book
 User.hasMany(Book, { foreignKey: "seller_id", onDelete: "CASCADE" });
-Book.belongsTo(User, { foreignKey: "seller_id" });
+Book.belongsTo(User, { foreignKey: "seller_id", as: "Seller" });
 
 // Book & BookImage
 Book.hasMany(BookImage, { foreignKey: "book_id", onDelete: "CASCADE" });
