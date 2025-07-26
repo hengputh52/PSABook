@@ -111,7 +111,7 @@ const HomePage = () => {
         className="book-section slide-up"
         style={{ animationDelay: "0.2s" }}
       >
-        <h3 className="section-title">Best Pick</h3>
+        <h3 className="section-title" style={{color: "black"}}>Best Pick</h3>
         <BookList filter={filter} searchTerm={searchTerm} />
         <p className="see-more pulse">see more</p>
       </section>
@@ -122,7 +122,7 @@ const HomePage = () => {
         className="book-section slide-up"
         style={{ animationDelay: "0.2s" }}
       >
-        <h3 className="section-title">Recently Added</h3>
+        <h3 className="section-title" style={{color: "black"}}>Recently Added</h3>
         <BookRecentlyAdded filter={filter} searchTerm={searchTerm} />
         <p className="see-more pulse">see more</p>
       </section>
