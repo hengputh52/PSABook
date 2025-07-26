@@ -21,7 +21,6 @@
 }
 
 .book-detail img {
-    max-width: 100px;
     object-fit: cover;
     margin-bottom: 20px;
     border: solid 1px;
@@ -154,6 +153,9 @@
   margin: 0 24px;
 }
 
+.seller-profile-img{
+  width: 100px;
+}
 .left-arrow {
     min-width: 25px;
     z-index: 2;

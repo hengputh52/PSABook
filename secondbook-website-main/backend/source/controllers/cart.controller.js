@@ -1,4 +1,4 @@
-import { CartItem } from "../models/index.js";
+import { CartItem, BookImage, Book } from "../models/index.js";
 
 // Add a book to cart
 export const addToCart = async (req, res) => {
@@ -15,7 +15,17 @@ export const addToCart = async (req, res) => {
 export const getCartItems = async (req, res) => {
   try {
     const { user_id } = req.params;
-    const items = await CartItem.findAll({ where: { user_id } });
+    const items = await CartItem.findAll({
+       where: { user_id },
+       include: [
+        { 
+          model: Book, include: [
+            {model: BookImage , attributes: ["image_url"], limit: 1}
+          ]
+          
+    }]
+      
+    });
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
