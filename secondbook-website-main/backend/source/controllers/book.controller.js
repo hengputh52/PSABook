@@ -65,15 +65,18 @@ export const sellBook = async (req, res) => {
 export const getBookById = async (req, res) => {
   try {
     const { bookId } = req.params;
-    const book = await Book.findByPk(bookId, {
-      include: 
-      [{ model: BookImage, 
-        
-       },
-        
-        {model: User, as: "Seller", attributes: [ 'username ','email']}
-      ]
-    });
+    const book = await Book.findOne(bookId, {
+    include:[
+      {
+      model: User,
+      attributes: ["user_id", "username", "email","address", "phone_number"],
+      },
+      {
+        model: BookImage,
+        attributes: ["image_url"]
+      }
+    ],
+    })
     if (!book) return res.status(404).json({ error: "Book not found" });
     res.json(book);
   } catch (err) {
