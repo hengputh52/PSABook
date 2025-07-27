@@ -1,65 +1,77 @@
-# DigitalOcean App Platform Configuration
-# Use this as a reference when setting up your app
-
 name: secondbook-marketplace
-services:
-- name: backend
-  source_dir: /backend
-  github:
-    repo: your-github-username/secondbook-website
-    branch: main
-  run_command: node source/server.js
-  environment_slug: node-js
-  instance_count: 1
-  instance_size_slug: basic-xxs
-  envs:
-  - key: NODE_ENV
-    value: production
-  - key: PORT
-    value: "8080"
-  - key: DB_HOST
-    type: SECRET
-    value: ${db.HOSTNAME}
-  - key: DB_USER
-    type: SECRET
-    value: ${db.USERNAME}
-  - key: DB_PASSWORD
-    type: SECRET
-    value: ${db.PASSWORD}
-  - key: DB_NAME
-    type: SECRET
-    value: ${db.DATABASE}
-  - key: DB_PORT
-    type: SECRET
-    value: ${db.PORT}
-  - key: JWT_SECRET
-    type: SECRET
-    value: your-super-secret-jwt-key-here
-  - key: FRONTEND_URL
-    value: ${_self.SCHEME}://${frontend.PUBLIC_URL}
-  routes:
-  - path: /api
-  http_port: 8080
 
-- name: frontend
-  source_dir: /frontend
-  github:
-    repo: your-github-username/secondbook-website
-    branch: main
-  build_command: npm run build
-  environment_slug: node-js
-  instance_count: 1
-  instance_size_slug: basic-xxs
-  envs:
-  - key: VITE_API_BASE
-    value: ${_self.SCHEME}://${backend.PUBLIC_URL}
-  routes:
-  - path: /
-  http_port: 8080
+services:
+  - name: backend
+    source_dir: /backend
+    github:
+      repo: your-github-username/secondbook-website
+      branch: main
+    run_command: node source/server.js
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "8080"
+      - key: DB_HOST
+        type: SECRET
+        value: ${db.HOSTNAME}
+      - key: DB_USER
+        type: SECRET
+        value: ${db.USERNAME}
+      - key: DB_PASSWORD
+        type: SECRET
+        value: ${db.PASSWORD}
+      - key: DB_NAME
+        type: SECRET
+        value: ${db.DATABASE}
+      - key: DB_PORT
+        type: SECRET
+        value: ${db.PORT}
+      - key: JWT_SECRET
+        type: SECRET
+        value: your-super-secret-jwt-key-here
+      - key: FRONTEND_URL
+        value: ${_self.SCHEME}://${frontend.PUBLIC_URL}
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dx4vm96l3
+      - key: CLOUDINARY_API_KEY
+        value: 117933636656895
+      - key: CLOUDINARY_API_SECRET
+        value: 2facaGJCsI-sbPAluXS5S_Ofg9Q
+    routes:
+      - path: /psa
+        preserve_path_prefix: true
+        target_port: 8080
+        protocol: http
+
+  - name: frontend
+    source_dir: /frontend
+    github:
+      repo: your-github-username/secondbook-website
+      branch: main
+    build_command: npm run build
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: VITE_API_URL
+        value: ${_self.SCHEME}://${backend.PUBLIC_URL}/psa
+      - key: VITE_CLOUDINARY_CLOUD
+        value: dx4vm96l3
+      - key: VITE_CLOUDINARY_UPLOAD_PRESET
+        value: profile_image
+    routes:
+      - path: /
+        target_port: 8080
+        protocol: http
+        preserve_path_prefix: true
 
 databases:
-- engine: MYSQL
-  name: db
-  num_nodes: 1
-  size: db-s-1vcpu-1gb
-  version: "8"
+  - engine: MYSQL
+    name: db
+    num_nodes: 1
+    size: db-s-1vcpu-1gb
+    version: "8"
