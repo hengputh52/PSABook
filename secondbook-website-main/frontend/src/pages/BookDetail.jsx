@@ -40,26 +40,31 @@ const BookDetail = () => {
     navigate("/payment", { state: { book } });
   };
 
-  const handleAddToCart = async () => {
-    try {
-      const user = JSON.parse(localStorage.getItem("userProfile"));
-      if (!user?.user_id) {
-        alert("Please log in to add to cart.");
-        return;
-      }
+const handleAddToCart = async () => {
+  const user = JSON.parse(localStorage.getItem("userProfile"));
+  if (!user || !user.user_id) {
+    alert("Please log in to add items to your cart.");
+    return;
+  }
 
-      const base = import.meta.env.VITE_API_BASE || "http://localhost:3000";
-      const res = await axios.post(`${base}/api/cart/add`, {
-        user_id: user.user_id,
-        book_id: book.book_id || book.id,
-        quantity: 1,
-      });
+  try {
+    const base = import.meta.env.VITE_API_BASE || "http://localhost:3000";
 
-      alert(res.data.message || "Book added to cart!");
-    } catch (err) {
-      alert("Failed to add to cart");
+    const response = await axios.post(`${base}/api/cart/add`, {
+      user_id: user.user_id,
+      book_id: book.book_id || book.id,
+    });
+
+    alert(`${book.title} has been added to your cart!`);
+  } catch (error) {
+    if (error.response?.status === 409) {
+      alert(`${book.title} is already in your cart.`);
+    } else {
+      console.error("Failed to add to cart", error);
+      alert("Failed to add book to cart. Please try again.");
     }
-  };
+  }
+};
 
   const handleSellerClick = () => {
     if (book.Seller?.user_id) {
