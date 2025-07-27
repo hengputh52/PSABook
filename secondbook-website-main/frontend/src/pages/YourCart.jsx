@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../styles/YourCart.css";
-
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const YourCart = () => {
-  const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const userId = localStorage.getItem("user_id"); // make sure this exists
 
   useEffect(() => {
-    // Fetch cart from localStorage
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart);
-  }, []);
+    if (!userId) return;
+    axios.get(`${API_BASE}/api/cart/${userId}`)
+      .then((res) => {
+        setCartItems(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching cart:", err);
+      });
+  }, [userId]);
 
-  const handleRemoveFromCart = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const handleRemoveFromCart = (cart_item_id) => {
+    axios.delete(`${API_BASE}/api/cart/${cart_item_id}`)
+      .then(() => {
+        setCartItems(prev => prev.filter(item => item.cart_item_id !== cart_item_id));
+      })
+      .catch((err) => {
+        console.error("Error removing item:", err);
+      });
   };
 
-  const handleClearCart = () => {
+  const handleClearCart = async () => {
     if (window.confirm("Are you sure you want to clear your entire cart?")) {
-      setCart([]);
-      localStorage.setItem("cart", JSON.stringify([]));
+      for (const item of cartItems) {
+        await axios.delete(`${API_BASE}/api/cart/${item.cart_item_id}`);
+      }
+      setCartItems([]);
     }
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, book) => {
-      const price = parseFloat(book.price.replace("$", ""));
+    return cartItems.reduce((total, item) => {
+      const price = parseFloat(item.Book?.price || 0);
       return total + price;
     }, 0).toFixed(2);
   };
@@ -34,14 +47,14 @@ const YourCart = () => {
     <div className="cart-container">
       <div className="cart-header">
         <h2 className="section-title">Your Cart</h2>
-        {cart.length > 0 && (
+        {cartItems.length > 0 && (
           <button className="clear-cart-btn" onClick={handleClearCart}>
             Clear Cart
           </button>
         )}
       </div>
 
-      {cart.length > 0 ? (
+      {cartItems.length > 0 ? (
         <>
           <div className="table-container">
             <table className="cart-table">
@@ -57,37 +70,41 @@ const YourCart = () => {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((book) => (
-                  <tr key={book.id}>
-                    <td>
-                      <img 
-                        src={book.image} 
-                        alt={book.title}
-                        className="cart-book-image"
-                        onError={(e) => {
-                          e.target.src = "https://via.placeholder.com/60x80?text=No+Image";
-                        }}
-                      />
-                    </td>
-                    <td className="book-title">{book.title}</td>
-                    <td>{book.author || "N/A"}</td>
-                    <td>{book.genre || "N/A"}</td>
-                    <td className="book-description">{book.description || "N/A"}</td>
-                    <td className="book-price">{book.price}</td>
-                    <td>
-                      <button
-                        className="remove-btn"
-                        onClick={() => handleRemoveFromCart(book.id)}
-                      >
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {cartItems.map((item) => {
+                  const book = item.Book;
+                  const imageUrl = book?.BookImages?.[0]?.image_url;
+                  return (
+                    <tr key={item.cart_item_id}>
+                      <td>
+                        <img
+                          src={imageUrl || "https://via.placeholder.com/60x80?text=No+Image"}
+                          alt={book?.title}
+                          className="cart-book-image"
+                          onError={(e) => {
+                            e.target.src = "https://via.placeholder.com/60x80?text=No+Image";
+                          }}
+                        />
+                      </td>
+                      <td className="book-title">{book?.title || "N/A"}</td>
+                      <td>{book?.author || "N/A"}</td>
+                      <td>{book?.genre || "N/A"}</td>
+                      <td className="book-description">{book?.description || "N/A"}</td>
+                      <td className="book-price">${book?.price || "0.00"}</td>
+                      <td>
+                        <button
+                          className="remove-btn"
+                          onClick={() => handleRemoveFromCart(item.cart_item_id)}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
-          
+
           <div className="cart-summary">
             <div className="total-section">
               <h3>Total: ${calculateTotal()}</h3>
