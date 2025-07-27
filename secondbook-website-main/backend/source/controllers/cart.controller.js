@@ -1,12 +1,24 @@
 import { CartItem, BookImage, Book } from "../models/index.js";
 
 // Add a book to cart
+// Add a book to cart
 export const addToCart = async (req, res) => {
   try {
     const { user_id, book_id } = req.body;
+
+    // Check if already in cart
+    const existingItem = await CartItem.findOne({
+      where: { user_id, book_id },
+    });
+
+    if (existingItem) {
+      return res.status(409).json({ message: "Book already in cart" });
+    }
+
     const cartItem = await CartItem.create({ user_id, book_id });
     res.status(201).json(cartItem);
   } catch (err) {
+    console.error("Error adding to cart:", err);
     res.status(500).json({ error: err.message });
   }
 };

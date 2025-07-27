@@ -8,7 +8,7 @@ const YourCart = () => {
 
   useEffect(() => {
     if (!userId) return;
-    axios.get(`${API_BASE}/api/cart/${userId}`)
+    axios.get(`${API_BASE}/api/cart/user/${userId}`)
       .then((res) => {
         setCartItems(res.data);
       })

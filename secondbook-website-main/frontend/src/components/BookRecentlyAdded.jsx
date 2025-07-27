@@ -6,6 +6,7 @@ import { fetchRecentBooks } from "../service/bookApi";
 
 // kept for backward compatibility
 export const hardcodedBooks = [];
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const BookRecentlyAdded = () => {
   const [recentlyAddedBooks, setRecentlyAddedBooks] = useState([]);
@@ -71,16 +72,28 @@ const BookRecentlyAdded = () => {
   }
 };
 
-  const handleAddToCart = (book) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (!cart.some((b) => b.id === book.id)) {
-      const updatedCart = [...cart, book];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      alert(`${book.title} has been added to your cart!`);
-    } else {
+const handleAddToCart = async (book) => {
+  const user = JSON.parse(localStorage.getItem("user")); // Assumes you store user info after login
+  if (!user || !user.id) {
+    alert("Please log in to add items to your cart.");
+    return;
+  }
+
+  try {
+    const response = await axios.post(`${API_BASE}/api/cart/add`, {
+      user_id: user.id,
+      book_id: book.book_id || book.id,
+    });
+    alert(`${book.title} has been added to your cart!`);
+  } catch (error) {
+    if (error.response?.status === 409) {
       alert(`${book.title} is already in your cart.`);
+    } else {
+      console.error("Failed to add to cart", error);
+      alert("Failed to add book to cart. Please try again.");
     }
-  };
+  }
+};
 
   const isBookInCart = (bookId) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
