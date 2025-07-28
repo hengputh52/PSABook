@@ -1,57 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookList from "../components/BookList";
-import "../styles/HomePage.css";
 import BookRecentlyAdded from "../components/BookRecentlyAdded";
+import "../styles/HomePage.css";
 
-const genres = [
-  "All",
-  "Fiction",
-  "Non-Fiction",
-  "Sci-Fi",
-  "History",
-  "Fantasy",
-  "Recently Added",
-];
-
-const prices = [
-  "All",
-  "Under $5",
-  "$5 - $10",
-  "$10 - $20",
-  "Above $20",
-];
+const genres = ["All", "Fiction", "Non-Fiction", "Sci-Fi", "History", "Fantasy"];
+const prices = ["All", "Under $5", "$5 - $10", "$10 - $20", "Above $20"];
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [selectedPrice, setSelectedPrice] = useState("All");
   const [filter, setFilter] = useState({ genre: "All", price: "All" });
+  const [showMoreBestPick, setShowMoreBestPick] = useState(false);
+  const [showMoreRecentlyAdded, setShowMoreRecentlyAdded] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const handleSearch = (e) => setSearchTerm(e.target.value);
 
-  const handleGenreChange = (e) => {
-    setSelectedGenre(e.target.value);
-  };
+  const handleGenreChange = (e) => setSelectedGenre(e.target.value);
 
-  const handlePriceChange = (e) => {
-    setSelectedPrice(e.target.value);
-  };
+  const handlePriceChange = (e) => setSelectedPrice(e.target.value);
 
   const handleBrowse = () => {
     setFilter({ genre: selectedGenre, price: selectedPrice });
     if (selectedGenre && selectedGenre !== "All") {
       navigate(`/genres/${encodeURIComponent(selectedGenre)}`);
     }
-    // Optionally, handle price filter in the route as well
   };
 
   return (
     <div className="homepage">
-      {/* Header + Search Bar with image on left */}
       <div className="header-bg-flex">
         <div className="header-image-side">
           <img
@@ -66,9 +46,7 @@ const HomePage = () => {
               <span className="highlight">Second Book</span>
             </h1>
             <p className="subtitle">
-              Find your next{" "}
-              <span className="highlight2">favorite book</span> or share one
-              you've already read!
+              Find your next <span className="highlight2">favorite book</span> or share one you've already read!
             </p>
           </header>
           <div className="search-bar-container">
@@ -84,52 +62,34 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Filter Section */}
       <div className="filter-section">
-        <select
-          className="filter-select"
-          value={selectedGenre}
-          onChange={handleGenreChange}
-        >
+        <select className="filter-select" value={selectedGenre} onChange={handleGenreChange}>
           {genres.map((genre) => (
-            <option key={genre} value={genre}>
-              {genre}
-            </option>
+            <option key={genre} value={genre}>{genre}</option>
           ))}
         </select>
-        <select
-          className="filter-select"
-          value={selectedPrice}
-          onChange={handlePriceChange}
-        >
+        <select className="filter-select" value={selectedPrice} onChange={handlePriceChange}>
           {prices.map((price) => (
-            <option key={price} value={price}>
-              {price}
-            </option>
+            <option key={price} value={price}>{price}</option>
           ))}
         </select>
-        <button className="browse-btn" onClick={handleBrowse}>
-          Browse
-        </button>
+        <button className="browse-btn" onClick={handleBrowse}>Browse</button>
       </div>
-       <section
-        className="book-section slide-up"
-        style={{ animationDelay: "0.2s" }}
-      >
-        <h3 className="section-title" style={{color: "black"}}>Best Pick</h3>
-        <BookList filter={filter} searchTerm={searchTerm} />
-        <p className="see-more pulse">see more</p>
-      </section>
-    
 
-      {/* Recently Added Section */}
-      <section
-        className="book-section slide-up"
-        style={{ animationDelay: "0.2s" }}
-      >
-        <h3 className="section-title" style={{color: "black"}}>Recently Added</h3>
-        <BookRecentlyAdded filter={filter} searchTerm={searchTerm} />
-        <p className="see-more pulse">see more</p>
+      <section className="book-section slide-up" style={{ animationDelay: "0.2s" }}>
+        <h3 className="section-title" style={{ color: "black" }}>Best Pick</h3>
+        <BookList filter={filter} searchTerm={searchTerm} showMore={showMoreBestPick} />
+        {!showMoreBestPick && (
+          <p className="see-more pulse" onClick={() => setShowMoreBestPick(true)}>see more</p>
+        )}
+      </section>
+
+      <section className="book-section slide-up" style={{ animationDelay: "0.4s" }}>
+        <h3 className="section-title" style={{ color: "black" }}>Recently Added</h3>
+        <BookRecentlyAdded filter={filter} searchTerm={searchTerm} showMore={showMoreRecentlyAdded} />
+        {!showMoreRecentlyAdded && (
+          <p className="see-more pulse" onClick={() => setShowMoreRecentlyAdded(true)}>see more</p>
+        )}
       </section>
     </div>
   );

@@ -69,5 +69,14 @@ export const deleteBook = async (id) => {
   return res.json();
 };
 
+export const fetchFilteredBooks = async (genre, price) => {
+  const params = new URLSearchParams();
+  if (genre && genre !== "All") params.append("genre", genre);
+  if (price && price !== "All") params.append("price", price);
+
+  const response = await fetch(`${API_URL}/filter?${params.toString()}`);
+  if (!response.ok) throw new Error("Failed to fetch filtered books");
+  return response.json();
+};
 
 

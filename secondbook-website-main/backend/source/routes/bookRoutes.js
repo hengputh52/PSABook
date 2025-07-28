@@ -6,7 +6,7 @@ import {
   updateBook, 
   deleteBook, 
   getGenres, 
-  getBooksByGenre,
+  getFilteredBooks,
   getMyBooks,
   uploadBookImages
 } from '../controllers/book.controller.js';
@@ -22,6 +22,7 @@ router.get('/genre/:genre', getBooksByGenre);
 // Book routes
 router.get('/recent', getRecentBooks);
 router.get('/my-books', authenticateToken, getMyBooks);  // New endpoint for user's books
+router.get('/filer', getFilteredBooks);
 router.post('/upload-images', authenticateToken, uploadMiddleware.array('images', 5), uploadBookImages); // Upload multiple images
 router.post('/', authenticateToken, sellBook);  // Protected route
 router.get('/:id', getBookById);

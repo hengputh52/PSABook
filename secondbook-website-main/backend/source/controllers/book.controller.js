@@ -1,6 +1,6 @@
 import { Book, BookImage, User } from "../models/index.js";
 import { GENRE_VALUES } from "../utils/genreList.js";
-
+import { Op } from "sequelize";
 // Get all available genres
 export const getGenres = async (req, res) => {
   try {
@@ -131,27 +131,27 @@ export const getRecentBooks = async (req, res) => {
 };
 
 // Get books by genre
-export const getBooksByGenre = async (req, res) => {
-  try {
-    const { genre } = req.params;
+// export const getBooksByGenre = async (req, res) => {
+//   try {
+//     const { genre } = req.params;
     
-    if (!GENRE_VALUES.includes(genre)) {
-      return res.status(400).json({ 
-        error: `Invalid genre. Must be one of: ${GENRE_VALUES.join(', ')}` 
-      });
-    }
+//     if (!GENRE_VALUES.includes(genre)) {
+//       return res.status(400).json({ 
+//         error: `Invalid genre. Must be one of: ${GENRE_VALUES.join(', ')}` 
+//       });
+//     }
     
-    const books = await Book.findAll({
-      where: { genre },
-      include: [{ model: BookImage }],
-      order: [['listed_at', 'DESC']],
-    });
+//     const books = await Book.findAll({
+//       where: { genre },
+//       include: [{ model: BookImage }],
+//       order: [['listed_at', 'DESC']],
+//     });
     
-    res.json(books);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+//     res.json(books);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
 // Get books sold by the current user
 export const getMyBooks = async (req, res) => {
@@ -206,5 +206,29 @@ export const uploadBookImages = async (req, res) => {
   } catch (err) {
     console.error("❌ Error uploading images:", err);
     res.status(500).json({ error: err.message });
+  }
+};
+
+// filter book based on genre or price
+export const getFilteredBooks = async (req, res) => {
+  try {
+    const { genre, price } = req.query;
+    const where = {};
+
+    if (genre && genre !== "All") {
+      where.genre = genre;
+    }
+
+    if (price && price !== "All") {
+      if (price === "Under $5") where.price = { [Op.lt]: 5 };
+      else if (price === "$5 - $10") where.price = { [Op.between]: [5, 10] };
+      else if (price === "$10 - $20") where.price = { [Op.between]: [10, 20] };
+      else if (price === "Above $20") where.price = { [Op.gt]: 20 };
+    }
+
+    const books = await Book.findAll({ where });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
