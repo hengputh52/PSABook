@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import InputInformation from "./components/InputInformation"; // Import InputInformation component
 import SellNow from "./pages/SellNow"; // Import SellNow component
@@ -17,6 +16,7 @@ import HistoryPage from "./components/HistoryPage"; // Import History Page
 import PaymentPage from "./components/PaymentPage"; // Import PaymentPage component
 import "./index.css"; // Import global CSS
 import SciFiPage from "./components/Sci-Fi-Page";
+import BookListPage from "./components/BookList"; // Import BookListPage component
 
 function App() {
   return (
@@ -44,6 +44,7 @@ function App() {
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/genre/:genreName" element={<BookListPage />} />
         <Route path="*" element={<h1>Page Not Found</h1>} /> {/* Fallback route */}
       </Routes>
 
