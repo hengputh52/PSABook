@@ -39,7 +39,7 @@ const CreditCardPage = () => {
   };
 
   return (
-    <div>
+    <div class="credit-card-container">
       <h2>Enter Credit Card Info</h2>
       {error && <p>{error}</p>}
       <input
