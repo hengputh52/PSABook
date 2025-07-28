@@ -8,6 +8,7 @@ import sequelize, { testConnection } from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
+import TransactionRoutes from "./routes/transactionRoutes.js";
 
 
 // Load environment variables
@@ -123,6 +124,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("api/transaction", TransactionRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

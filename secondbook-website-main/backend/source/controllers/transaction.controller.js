@@ -1,20 +1,21 @@
-import { Transaction } from "../models/index.js";
+import { Transaction, Book } from "../models/index.js";
 
 // Create a new transaction
 export const createTransaction = async (req, res) => {
   try {
-    const { book_id, buyer_id, seller_id, amount, payment_method, status } = req.body;
+    const { book_id, buyer_id, seller_id, amount, payment_method} = req.body;
     const transaction = await Transaction.create({
       book_id,
       buyer_id,
       seller_id,
       amount,
       payment_method,
-      status,
+      status: "completed",
     });
+    await Book.update({ status: "sold"}, {where: {book_id}});
     res.status(201).json(transaction);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Transaction failed" });
   }
 };
 
