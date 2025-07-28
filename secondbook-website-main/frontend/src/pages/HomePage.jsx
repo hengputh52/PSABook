@@ -3,7 +3,7 @@ import BookList from "../components/BookList";
 import BookRecentlyAdded from "../components/BookRecentlyAdded";
 import "../styles/HomePage.css";
 
-const genres = ["All", "Fiction", "Non-Fiction", "Sci-Fi", "History", "Fantasy"];
+const genres = ["All", "Fiction", "Non-Fiction", "Sci-Fi", "History", "fantasy"];
 const prices = ["All", "Under $5", "$5 - $10", "$10 - $20", "Above $20"];
 
 const HomePage = () => {
