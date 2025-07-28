@@ -31,9 +31,9 @@ const QRCodePage = () => {
   };
 
   return (
-    <div calssName="qr-code-container">
+    <div class="qr-code-container">
       <h2>Scan to Pay</h2>
-      <img src="/qrcode.jpg" alt="ABA QR Code" style={{ width: "200px" }} />
+      <img src="/qrcode.jpg" alt="ABA QR Code" style={{ width: "300px" }} />
       <button onClick={handleConfirm}>I Have Paid</button>
     </div>
   );

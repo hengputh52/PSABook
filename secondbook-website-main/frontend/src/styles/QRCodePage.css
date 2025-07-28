@@ -1,7 +1,7 @@
 /* src/styles/QRCodePage.css */
 
 .qr-code-container {
-  max-width: 400px;
+  max-width: 600px;
   margin: 60px auto;
   text-align: center;
   padding: 30px;
@@ -17,14 +17,15 @@
 }
 
 .qr-code-container img {
-  width: 220px;
+  width: 100%;
+  max-width: 500px;
   margin-bottom: 20px;
-  border: 4px solid #007bff;
+  border: 4px solid #000000;
   border-radius: 8px;
 }
 
 .qr-code-container button {
-  background: #28a745;
+  background: #000000;
   color: white;
   font-weight: bold;
   padding: 12px 20px;
@@ -36,7 +37,7 @@
 }
 
 .qr-code-container button:hover {
-  background: #218838;
+  background: #3e3f3e;
 }
 
 .qr-code-page {
@@ -44,5 +45,5 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #123263;
+  background-color: #08101b;
 }
