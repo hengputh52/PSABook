@@ -97,7 +97,7 @@ const BookList = ({ filter, searchTerm, showMore }) => {
           {books.slice(0, showMore ? books.length : visibleCount).map((book) => (
             
             <div key={book.id || book.book_id} className="book-card">
-              <Link to={`/book/${book.genre || "general"}/${book.id}`}>
+              <Link to={`/book/${book.genre || "general"}/${book.id || book.book_id}`}>
                 <img src={book.image || book.BookImages?.[0]?.image_url || "/default-book.png"} alt={book.title} />
                 <h4>{book.title}</h4>
                 <p>{book.price}$</p>
