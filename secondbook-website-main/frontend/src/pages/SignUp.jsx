@@ -35,7 +35,8 @@ const SignUp = () => {
       setError("");
       const data = await loginUser(loginInfo);
       // Assuming API returns user object and token
-      localStorage.setItem("user", JSON.stringify(data.user)); // ✅ consistent with your cart code
+      localStorage.setItem("userProfile", JSON.stringify(data.user));
+ // ✅ consistent with your cart code
       localStorage.setItem("token", data.token);
       window.dispatchEvent(new Event("storage-changed")); // Notify Nav
       navigate("/profile");
