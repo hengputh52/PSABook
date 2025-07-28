@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BookList from "../components/BookList";
 import "../styles/HomePage.css";
 import BookRecentlyAdded from "../components/BookRecentlyAdded";
@@ -26,6 +27,7 @@ const HomePage = () => {
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [selectedPrice, setSelectedPrice] = useState("All");
   const [filter, setFilter] = useState({ genre: "All", price: "All" });
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -41,7 +43,10 @@ const HomePage = () => {
 
   const handleBrowse = () => {
     setFilter({ genre: selectedGenre, price: selectedPrice });
-    // You can pass filter to BookList/BookRecentlyAdded as props if you want to filter data there
+    if (selectedGenre && selectedGenre !== "All") {
+      navigate(`/genre/${encodeURIComponent(selectedGenre)}`);
+    }
+    // Optionally, handle price filter in the route as well
   };
 
   return (
