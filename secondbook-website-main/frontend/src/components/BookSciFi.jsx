@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
-import { books } from "./BookList";
+
 import "../styles/BookList.css";
 
 const BookSciFi = () => {

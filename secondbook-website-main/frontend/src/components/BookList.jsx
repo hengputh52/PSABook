@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/BookList.css";
-import { fetchFilteredBooks } from "../api/bookApi";
+import { fetchFilteredBooks } from "../service/bookApi";
 
 const BookList = ({ filter, searchTerm }) => {
   const [books, setBooks] = useState([]);
