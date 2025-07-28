@@ -10,27 +10,34 @@ const limit = 8;
 const BookRecentlyAdded = () => {
   const [recentlyAddedBooks, setRecentlyAddedBooks] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    const fetchRecent = async (newOffset = 0, append = false) => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
+
+  useEffect(() => {
+    const fetchRecent = async () => {
       try {
-        const books = await fetchRecentBooks({ limit, offset: newOffset });
-        setRecentlyAddedBooks((prev) => (append ? [...prev, ...books] : books));
+        const books = await fetchRecentBooks({ limit, offset: 0 });
+        setRecentlyAddedBooks(books);
+        setOffset(limit);
       } catch (err) {
         console.error("Failed to load recent books", err);
         const localBooks = JSON.parse(localStorage.getItem("recentlyAddedBooks")) || [];
-        if (localBooks.length > 0) {
-          setRecentlyAddedBooks(localBooks.slice(newOffset, newOffset + limit));
-        }
+        setRecentlyAddedBooks(localBooks.slice(0, limit));
+        setOffset(limit);
       }
     };
-    fetchRecent(0, false);
+
+    fetchRecent();
   }, []);
 
   const handleSeeMore = async () => {
     const newOffset = offset + limit;
     try {
-      const moreBooks = await fetchRecentBooks({ limit, offset: newOffset });
+      const moreBooks = await fetchRecentBooks({ limit, offset });
       setRecentlyAddedBooks((prev) => [...prev, ...moreBooks]);
       setOffset(newOffset);
     } catch (err) {
@@ -49,12 +56,12 @@ const BookRecentlyAdded = () => {
     let user;
     try {
       user = JSON.parse(storedUser);
-    } catch (e) {
+    } catch {
       alert("User data corrupted. Please log in again.");
       return;
     }
 
-    if (!user || !user.user_id) {
+    if (!user?.user_id) {
       alert("Please log in to add items to your cart.");
       return;
     }
@@ -64,6 +71,11 @@ const BookRecentlyAdded = () => {
         user_id: user.user_id,
         book_id: book.book_id || book.id,
       });
+
+      const updatedCart = [...cart, book];
+      setCart(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
       alert(`${book.title} has been added to your cart!`);
     } catch (error) {
       if (error.response?.status === 409) {
@@ -76,7 +88,6 @@ const BookRecentlyAdded = () => {
   };
 
   const isBookInCart = (bookId) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     return cart.some((b) => b.book_id === bookId || b.id === bookId);
   };
 
@@ -90,13 +101,8 @@ const BookRecentlyAdded = () => {
 
           return (
             <div className="book-card" key={bookId}>
-              <Link to={`/book/${bookId}`}>
-                <img
-                  src={imageUrl}
-                  alt={book.title}
-                  className="book-image"
-                  style={{ marginLeft: 0 }}
-                />
+              <Link to={`/book/${book.genre || "general"}/${bookId}`}>
+                <img src={imageUrl} alt={book.title} className="book-image" />
                 <h3>{book.title}</h3>
                 <p>${Number(book.price).toFixed(2)}</p>
               </Link>
@@ -112,9 +118,9 @@ const BookRecentlyAdded = () => {
         })}
       </div>
 
-      {recentlyAddedBooks.length >= limit && (
+      {recentlyAddedBooks.length >= offset && (
         <p className="see-more pulse" onClick={handleSeeMore}>
-          see more
+          See More
         </p>
       )}
     </div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import BookList from "../components/BookList";
 import BookRecentlyAdded from "../components/BookRecentlyAdded";
 import "../styles/HomePage.css";
@@ -15,19 +14,18 @@ const HomePage = () => {
   const [showMoreBestPick, setShowMoreBestPick] = useState(false);
   const [showMoreRecentlyAdded, setShowMoreRecentlyAdded] = useState(false);
 
-  const navigate = useNavigate();
-
   const handleSearch = (e) => setSearchTerm(e.target.value);
 
-  const handleGenreChange = (e) => setSelectedGenre(e.target.value);
+  const handleGenreChange = (e) => {
+    const genre = e.target.value;
+    setSelectedGenre(genre);
+    setFilter((prev) => ({ ...prev, genre }));
+  };
 
-  const handlePriceChange = (e) => setSelectedPrice(e.target.value);
-
-  const handleBrowse = () => {
-    setFilter({ genre: selectedGenre, price: selectedPrice });
-    if (selectedGenre && selectedGenre !== "All") {
-      navigate(`/genres/${encodeURIComponent(selectedGenre)}`);
-    }
+  const handlePriceChange = (e) => {
+    const price = e.target.value;
+    setSelectedPrice(price);
+    setFilter((prev) => ({ ...prev, price }));
   };
 
   return (
@@ -73,7 +71,6 @@ const HomePage = () => {
             <option key={price} value={price}>{price}</option>
           ))}
         </select>
-        <button className="browse-btn" onClick={handleBrowse}>Browse</button>
       </div>
 
       <section className="book-section slide-up" style={{ animationDelay: "0.2s" }}>
