@@ -4,8 +4,8 @@ import "../styles/YourCart.css";
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const YourCart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const user = JSON.parse(localStorage.getItem("userProfile"));
-  const userId = user?.user_id;
+  const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+  const userId = userProfile?.user_id;
   useEffect(() => {
     if (!userId) return;
     axios.get(`${API_BASE}/api/cart/user/${userId}`)
