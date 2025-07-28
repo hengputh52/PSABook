@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
+import { books } from "./BookList";
 import "../styles/BookList.css";
 
 const BookSciFi = () => {
   const [cart, setCart] = useState([]);
+
+  // Filter books for Sci-Fi genre (by title or genre if available)
+  const sciFiBooks = books.filter(
+    (book) =>
+      (book.genre &&
+        (book.genre.toLowerCase().includes("science fiction") ||
+          book.genre.toLowerCase().includes("sci-fi"))) ||
+      book.title.toLowerCase().includes("science fiction") ||
+      book.title.toLowerCase().includes("sci-fi")
+  );
 
   useEffect(() => {
     // Fetch cart from localStorage

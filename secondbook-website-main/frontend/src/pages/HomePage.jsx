@@ -8,7 +8,7 @@ const genres = [
   "All",
   "Fiction",
   "Non-Fiction",
-  "Science Fiction",
+  "Sci-Fi",
   "History",
   "Fantasy",
   "Recently Added",
@@ -44,7 +44,7 @@ const HomePage = () => {
   const handleBrowse = () => {
     setFilter({ genre: selectedGenre, price: selectedPrice });
     if (selectedGenre && selectedGenre !== "All") {
-      navigate(`/genre/${encodeURIComponent(selectedGenre)}`);
+      navigate(`/genres/${encodeURIComponent(selectedGenre)}`);
     }
     // Optionally, handle price filter in the route as well
   };

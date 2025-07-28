@@ -17,6 +17,7 @@ import PaymentPage from "./components/PaymentPage"; // Import PaymentPage compon
 import "./index.css"; // Import global CSS
 import SciFiPage from "./components/Sci-Fi-Page";
 import BookListPage from "./components/BookList"; // Import BookListPage component
+import GenreBooksPage from "./pages/GenreBooksPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/your-cart" element={<YourCart />} />
         <Route path="/books-you-sell" element={<BooksYouSell />} />
         <Route path="/genres/science-fiction" element={<SciFiPage />} /> {/* Use BookSciFi for Sci-Fi genre */}
+        <Route path="/genres/all" element={<BookListPage />} />
         <Route path="/genres/fantasy" element={<FantasyPage />} />
         <Route path="/genres/non-fiction" element={<NonFictionPage />} />
         <Route path="/genres/fiction" element={<FictionPage />} />
@@ -44,7 +46,7 @@ function App() {
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
         <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/genre/:genreName" element={<BookListPage />} />
+        <Route path="/genres/:genreName" element={<GenreBooksPage />} />
         <Route path="*" element={<h1>Page Not Found</h1>} /> {/* Fallback route */}
       </Routes>
 
