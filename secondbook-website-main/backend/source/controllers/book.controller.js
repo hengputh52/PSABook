@@ -227,6 +227,7 @@ export const getFilteredBooks = async (req, res) => {
     }
 
     const books = await Book.findAll({ 
+      where,
       include: [{model: BookImage}]
     });
     res.json(books);
