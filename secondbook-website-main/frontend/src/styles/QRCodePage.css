@@ -38,3 +38,11 @@
 .qr-code-container button:hover {
   background: #218838;
 }
+
+.qr-code-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #123263;
+}
