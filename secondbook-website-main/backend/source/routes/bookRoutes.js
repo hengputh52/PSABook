@@ -21,7 +21,7 @@ router.get('/genres', getGenres);
 // Book routes
 router.get('/recent', getRecentBooks);
 router.get('/my-books', authenticateToken, getMyBooks);  // New endpoint for user's books
-router.get('/filer', getFilteredBooks);
+router.get('/filter', getFilteredBooks);
 router.post('/upload-images', authenticateToken, uploadMiddleware.array('images', 5), uploadBookImages); // Upload multiple images
 router.post('/', authenticateToken, sellBook);  // Protected route
 router.get('/:id', getBookById);

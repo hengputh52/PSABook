@@ -3,7 +3,13 @@ import BookList from "../components/BookList";
 import BookRecentlyAdded from "../components/BookRecentlyAdded";
 import "../styles/HomePage.css";
 
-const genres = ["All", "Fiction", "Non-Fiction", "Sci-Fi", "History", "fantasy"];
+const genres = [
+  'All','fiction', 'non-fiction', 'science-fiction', 'fantasy', 'mystery', 'romance',
+  'thriller', 'horror', 'biography', 'history', 'self-help', 'business',
+  'technology', 'health', 'travel', 'cooking', 'art', 'religion', 'philosophy',
+  'poetry', 'drama', 'children', 'young-adult', 'textbook', 'reference'
+]
+;
 const prices = ["All", "Under $5", "$5 - $10", "$10 - $20", "Above $20"];
 
 const HomePage = () => {
