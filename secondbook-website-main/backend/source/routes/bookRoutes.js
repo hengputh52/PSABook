@@ -17,7 +17,6 @@ const router = express.Router();
 
 // Genre routes
 router.get('/genres', getGenres);
-router.get('/genre/:genre', getBooksByGenre);
 
 // Book routes
 router.get('/recent', getRecentBooks);
