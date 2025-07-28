@@ -3,7 +3,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/QRCodePage.css";
-import qr from "../assets/qrcode.jpg"
+
 const API_BASE = import.meta.env.VITE_API_URL;
 
 const QRCodePage = () => {
@@ -33,7 +33,7 @@ const QRCodePage = () => {
   return (
     <div>
       <h2>Scan to Pay</h2>
-      <img src={qr} alt="ABA QR Code" style={{ width: "200px" }} />
+      <img src="/qrcode.jpg" alt="ABA QR Code" style={{ width: "200px" }} />
       <button onClick={handleConfirm}>I Have Paid</button>
     </div>
   );
