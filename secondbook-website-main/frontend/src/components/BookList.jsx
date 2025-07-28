@@ -33,13 +33,60 @@ const BookList = ({ filter, searchTerm, showMore }) => {
     loadBooks();
   }, [filter, searchTerm]);
 
-  const handleAddToCart = (book) => {
-    if (!cart.some((item) => item.id === book.id)) {
+  // const handleAddToCart = (book) => {
+  //   if (!cart.some((item) => item.id === book.id)) {
+  //     const updatedCart = [...cart, book];
+  //     setCart(updatedCart);
+  //     localStorage.setItem("cart", JSON.stringify(updatedCart));
+  //   }
+  // };
+  const handleAddToCart = async (book) => {
+    const storedUser = localStorage.getItem("userProfile");
+
+    if (!storedUser) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+
+    let user;
+    try {
+      user = JSON.parse(storedUser);
+    } catch {
+      alert("User data corrupted. Please log in again.");
+      return;
+    }
+
+    if (!user?.user_id) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+
+    try {
+      await axios.post(`${API_BASE}/api/cart/add`, {
+        user_id: user.user_id,
+        book_id: book.book_id || book.id,
+      });
+
       const updatedCart = [...cart, book];
       setCart(updatedCart);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      alert(`${book.title} has been added to your cart!`);
+    } catch (error) {
+      if (error.response?.status === 409) {
+        alert(`${book.title} is already in your cart.`);
+      } else {
+        console.error("Failed to add to cart", error);
+        alert("Failed to add book to cart. Please try again.");
+      }
     }
   };
+
+  const isBookInCart = (bookId) => {
+    return cart.some((b) => b.book_id === bookId || b.id === bookId);
+  };
+
+
 
   return (
     <div className="book-list">
@@ -49,19 +96,18 @@ const BookList = ({ filter, searchTerm, showMore }) => {
         <>
           {books.slice(0, showMore ? books.length : visibleCount).map((book) => (
             
-            <div key={book.id} className="book-card">
+            <div key={book.id || book.book_id} className="book-card">
               <Link to={`/book/${book.genre || "general"}/${book.id}`}>
                 <img src={book.image || book.BookImages?.[0]?.image_url || "/default-book.png"} alt={book.title} />
                 <h4>{book.title}</h4>
                 <p>{book.price}$</p>
               </Link>
               <button
+                className="add-to-cart-btn"
                 onClick={() => handleAddToCart(book)}
-                disabled={cart.some((item) => item.id === book.id)}
+                disabled={isBookInCart(book.id || book.book_id)}
               >
-                {cart.some((item) => item.id === book.id)
-                  ? "Already Added"
-                  : "Add to Cart"}
+                {isBookInCart(book.id || book.book_id) ? "Already Added" : "Add to Cart"}
               </button>
             </div>
           ))}
