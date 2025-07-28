@@ -7,6 +7,7 @@ const BookList = ({ filter, searchTerm, showMore }) => {
   const [books, setBooks] = useState([]);
   const [cart, setCart] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -47,9 +48,10 @@ const BookList = ({ filter, searchTerm, showMore }) => {
       ) : (
         <>
           {books.slice(0, showMore ? books.length : visibleCount).map((book) => (
+            
             <div key={book.id} className="book-card">
               <Link to={`/book/${book.genre || "general"}/${book.id}`}>
-                <img src={book.image} alt={book.title} />
+                <img src={book.image || book.BookImages?.[0]?.image_url || "/default-book.png"} alt={book.title} />
                 <h4>{book.title}</h4>
                 <p>{book.price}$</p>
               </Link>

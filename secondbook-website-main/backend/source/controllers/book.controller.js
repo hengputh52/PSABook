@@ -226,7 +226,9 @@ export const getFilteredBooks = async (req, res) => {
       else if (price === "Above $20") where.price = { [Op.gt]: 20 };
     }
 
-    const books = await Book.findAll({ where });
+    const books = await Book.findAll({ 
+      include: [{model: BookImage}]
+    });
     res.json(books);
   } catch (error) {
     res.status(500).json({ error: error.message });
