@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "../styles/BookList.css";
 import { fetchFilteredBooks } from "../service/bookApi";
 
-const BookList = ({ filter, searchTerm }) => {
+const BookList = ({ filter, searchTerm, showMore }) => {
   const [books, setBooks] = useState([]);
   const [cart, setCart] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(6); // Show 6 books initially
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -23,7 +23,7 @@ const BookList = ({ filter, searchTerm }) => {
             )
           : filtered;
         setBooks(result);
-        setVisibleCount(6); // Reset visible books when filter/search changes
+        setVisibleCount(6); // Reset visibility on new filter/search
       } catch (err) {
         console.error("Error loading books:", err);
       }
@@ -40,17 +40,13 @@ const BookList = ({ filter, searchTerm }) => {
     }
   };
 
-  const handleSeeMore = () => {
-    setVisibleCount((prev) => prev + 6);
-  };
-
   return (
     <div className="book-list">
       {books.length === 0 ? (
         <p>No books found.</p>
       ) : (
         <>
-          {books.slice(0, visibleCount).map((book) => (
+          {books.slice(0, showMore ? books.length : visibleCount).map((book) => (
             <div key={book.id} className="book-card">
               <Link to={`/book/${book.genre || "general"}/${book.id}`}>
                 <img src={book.image} alt={book.title} />
@@ -67,11 +63,6 @@ const BookList = ({ filter, searchTerm }) => {
               </button>
             </div>
           ))}
-          {visibleCount < books.length && (
-            <p className="see-more pulse" onClick={handleSeeMore}>
-              See More
-            </p>
-          )}
         </>
       )}
     </div>
