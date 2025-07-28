@@ -72,16 +72,54 @@ const BookRecentlyAdded = () => {
   }
 };
 
+// const handleAddToCart = async (book) => {
+//   const user = JSON.parse(localStorage.getItem("userProfile")); // Assumes you store user info after login
+//   if (!user || !user.user_id) {
+//     alert("Please log in to add items to your cart.");
+//     return;
+//   }
+
+//   try {
+//     const response = await axios.post(`${API_BASE}/api/cart/add`, {
+//       user_id: user.user_id,
+//       book_id: book.book_id || book.id,
+//     });
+//     alert(`${book.title} has been added to your cart!`);
+//   } catch (error) {
+//     if (error.response?.status === 409) {
+//       alert(`${book.title} is already in your cart.`);
+//     } else {
+//       console.error("Failed to add to cart", error);
+//       alert("Failed to add book to cart. Please try again.");
+//     }
+//   }
+// };
+
+
 const handleAddToCart = async (book) => {
-  const user = JSON.parse(localStorage.getItem("userProfile")); // Assumes you store user info after login
-  if (!user || !user.id) {
+  const storedUser = localStorage.getItem("userProfile");
+
+  if (!storedUser) {
+    alert("Please log in to add items to your cart.");
+    return;
+  }
+
+  let user;
+  try {
+    user = JSON.parse(storedUser);
+  } catch (e) {
+    alert("User data corrupted. Please log in again.");
+    return;
+  }
+
+  if (!user || !user.user_id) {
     alert("Please log in to add items to your cart.");
     return;
   }
 
   try {
     const response = await axios.post(`${API_BASE}/api/cart/add`, {
-      user_id: user.id,
+      user_id: user.user_id,
       book_id: book.book_id || book.id,
     });
     alert(`${book.title} has been added to your cart!`);
