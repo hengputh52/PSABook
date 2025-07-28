@@ -73,7 +73,7 @@ const BookRecentlyAdded = () => {
 };
 
 const handleAddToCart = async (book) => {
-  const user = JSON.parse(localStorage.getItem("user")); // Assumes you store user info after login
+  const user = JSON.parse(localStorage.getItem("userProfile")); // Assumes you store user info after login
   if (!user || !user.id) {
     alert("Please log in to add items to your cart.");
     return;
