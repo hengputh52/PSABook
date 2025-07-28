@@ -56,3 +56,14 @@ export const removeFromCart = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const clearCartByUser = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    await CartItem.destroy({ where: { user_id } });
+    res.json({ message: "All cart items removed." });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+

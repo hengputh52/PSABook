@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/YourCart.css";
+
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const YourCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const userProfile = JSON.parse(localStorage.getItem("userProfile"));
   const userId = userProfile?.user_id;
+
   useEffect(() => {
     if (!userId) return;
     axios.get(`${API_BASE}/api/cart/user/${userId}`)
@@ -17,22 +20,24 @@ const YourCart = () => {
       });
   }, [userId]);
 
-  const handleRemoveFromCart = (cart_item_id) => {
-    axios.delete(`${API_BASE}/api/cart/${cart_item_id}`)
-      .then(() => {
-        setCartItems(prev => prev.filter(item => item.cart_item_id !== cart_item_id));
-      })
-      .catch((err) => {
-        console.error("Error removing item:", err);
-      });
+  const handleRemoveFromCart = async (cart_item_id) => {
+    try {
+      await axios.delete(`${API_BASE}/api/cart/${cart_item_id}`);
+      setCartItems(prev => prev.filter(item => item.cart_item_id !== cart_item_id));
+    } catch (err) {
+      console.error("Error removing item:", err);
+    }
   };
 
   const handleClearCart = async () => {
+    if (!userId) return;
     if (window.confirm("Are you sure you want to clear your entire cart?")) {
-      for (const item of cartItems) {
-        await axios.delete(`${API_BASE}/api/cart/${item.cart_item_id}`);
+      try {
+        await axios.delete(`${API_BASE}/api/cart/clear/${userId}`);
+        setCartItems([]);
+      } catch (err) {
+        console.error("Error clearing cart:", err);
       }
-      setCartItems([]);
     }
   };
 

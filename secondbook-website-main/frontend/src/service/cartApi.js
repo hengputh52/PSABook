@@ -8,3 +8,13 @@ export const fetchCartItems = async (user_id) =>
     const response = await axios.get(`${API_URL}/${user_id}`);
     return response.data;
 }
+
+export const removeFromCart = async (cart_item_id) => {
+  const response = await axios.delete(`${API_URL}/${cart_item_id}`);
+  return response.data;
+};
+
+export const clearCart = async (user_id) => {
+  const response = await axios.delete(`${API_URL}/clear/${user_id}`);
+  return response.data;
+};
