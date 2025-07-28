@@ -16,6 +16,8 @@ import HistoryPage from "./components/HistoryPage"; // Import History Page
 import PaymentPage from "./pages/PaymentPage"; // Import PaymentPage component
 import "./index.css"; // Import global CSS
 import SciFiPage from "./components/Sci-Fi-Page";
+import CreditCardPage from "./pages/CreditCartPage";
+import QRCodePage from "./pages/QRCodePage";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/credit-card" element={<CreditCardPage />} />
+        <Route path="/qr-code" element={<QRCodePage />} />
         <Route path="*" element={<h1>Page Not Found</h1>} /> {/* Fallback route */}
       </Routes>
 
