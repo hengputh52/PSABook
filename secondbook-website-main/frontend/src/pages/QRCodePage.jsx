@@ -27,6 +27,7 @@ const QRCodePage = () => {
     } catch (err) {
       console.error(err);
       alert("Transaction failed");
+      setTimeout(() => navigate("/"), 100);
     }
   };
 
