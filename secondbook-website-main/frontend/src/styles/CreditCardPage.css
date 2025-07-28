@@ -28,7 +28,7 @@
 .credit-card-container button {
   width: 100%;
   padding: 12px;
-  background: #007bff;
+  background: #0d0d0e;
   color: white;
   font-weight: bold;
   border: none;
@@ -39,7 +39,7 @@
 }
 
 .credit-card-container button:hover {
-  background: #0056b3;
+  background: #373838;
 }
 
 .credit-card-container p {
