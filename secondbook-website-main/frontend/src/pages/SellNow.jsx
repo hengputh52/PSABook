@@ -168,9 +168,9 @@ const SellNow = () => {
       }
 
       // Optionally redirect to Books You Sell page
-      if (window.confirm('Book added successfully! Would you like to view your books?')) {
-        window.location.href = '/psabook/books-you-sell';
-      }
+      // if (window.confirm('Book added successfully! Would you like to view your books?')) {
+      //   window.location.href = '/psabook/books-you-sell';
+      // }
 
     } catch (error) {
       console.error('Error selling book:', error);
