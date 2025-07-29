@@ -19,6 +19,7 @@ import SciFiPage from "./components/Sci-Fi-Page";
 import BookListPage from "./components/BookList"; // Import BookListPage component
 import CreditCardPage from "./pages/CreditCartPage";
 import QRCodePage from "./pages/QRCodePage";
+import SellerProfile from "./pages/SellerProfile";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/genres/fiction" element={<FictionPage />} />
         <Route path="/genres/history" element={<HistoryPage />} />
         <Route path="/book/:id" element={<BookDetail />} /> {/* Generic route for any book */}
+        <Route path="/profile/:user_id" element={<SellerProfile />} />
         <Route path="/book/:genre/:id" element={<BookDetail />} /> {/* Route with genre for BookDetail */}
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
