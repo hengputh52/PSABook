@@ -68,7 +68,7 @@ const handleAddToCart = async () => {
 
   const handleSellerClick = () => {
     if (book.Seller?.user_id) {
-      navigate(`/profile/${book.Seller.user_id}`, {
+      navigate(`/seller/${book.Seller.user_id}`, {
         state: { seller: book.Seller },
       });
     }

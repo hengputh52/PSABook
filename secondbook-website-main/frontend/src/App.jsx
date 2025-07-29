@@ -44,7 +44,7 @@ function App() {
         <Route path="/genres/fiction" element={<FictionPage />} />
         <Route path="/genres/history" element={<HistoryPage />} />
         <Route path="/book/:id" element={<BookDetail />} /> {/* Generic route for any book */}
-        <Route path="/profile/:user_id" element={<SellerProfile />} />
+        <Route path="/seller/:user_id" element={<SellerProfile />} />
         <Route path="/book/:genre/:id" element={<BookDetail />} /> {/* Route with genre for BookDetail */}
         <Route path="/input-info" element={<InputInformation />} />
         <Route path="/sell" element={<SellNow />} />
