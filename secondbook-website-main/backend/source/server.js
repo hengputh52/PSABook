@@ -124,7 +124,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/cart", cartRoutes);
-app.use("api/transaction", TransactionRoutes);
+app.use("/api/transaction", TransactionRoutes);
 app.use("/api/seller", SellerRoutes);
 
 // Health check endpoint
