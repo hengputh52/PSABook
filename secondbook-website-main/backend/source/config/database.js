@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// Resolve path to ../.env (same level as source directory)
+// Resolve path to ../../.env (backend/.env)
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || process.env.DB_Name, // Support both naming conventions
@@ -23,9 +23,7 @@ const sequelize = new Sequelize(
         require: true,
         rejectUnauthorized: false
       } : false,
-      connectTimeout: 60000,
-      acquireTimeout: 60000,
-      timeout: 60000,
+      connectTimeout: 60000
     },
     
     // Connection pool settings for production
